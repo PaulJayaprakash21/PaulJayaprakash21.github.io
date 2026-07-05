@@ -174,6 +174,34 @@
   }
   @media (prefers-reduced-motion:reduce){.cloud,.window{animation:none}}
 
+  .incident-card{padding:0;overflow:hidden}
+  .incident-toggle{
+    all:unset;box-sizing:border-box;display:block;width:100%;padding:24px;cursor:pointer;position:relative
+  }
+  .incident-toggle .teaser{font-size:14.5px;color:var(--muted);margin-top:4px}
+  .incident-chev{
+    position:absolute;top:24px;right:22px;color:var(--faint);
+    font-size:14px;transition:transform .25s ease
+  }
+  .incident-toggle[aria-expanded="true"] .incident-chev{transform:rotate(180deg);color:var(--cyan)}
+  .incident-details{max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .incident-details-inner{padding:0 24px 24px}
+  .incident-details-inner p{font-size:14.5px;color:var(--muted);margin-bottom:14px}
+
+  /* ---------- floating dock ---------- */
+  .dock{
+    position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:60;
+    display:flex;gap:4px;padding:8px;border-radius:100px;
+    background:rgba(16,27,46,.75);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border:1px solid var(--line);box-shadow:0 14px 40px rgba(0,0,0,.4)
+  }
+  .dock a{
+    padding:8px 16px;border-radius:100px;font-size:13px;font-family:var(--mono);
+    color:var(--muted);white-space:nowrap;transition:background .2s,color .2s
+  }
+  .dock a:hover,.dock a.active{background:rgba(59,130,246,.16);color:var(--cyan)}
+  @media (max-width:900px){.dock{display:none}}
+
   /* ---------- tool logo grid ---------- */
   .toolgrid{
     display:grid;grid-template-columns:repeat(10,1fr);gap:14px;
@@ -227,7 +255,10 @@
     text-transform:uppercase;color:var(--faint);margin:36px 0 -6px
   }
   .incident-group:first-child{margin-top:8px}
-  .incidents{display:grid;gap:20px;margin-top:36px}
+  .incidents{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:18px;margin-top:36px;align-items:start
+  }
   .ticket{
     background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;
     transition:border-color .2s, transform .2s, box-shadow .2s
@@ -355,6 +386,15 @@
     </div>
     <button class="hamburger" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
   </div>
+</nav>
+
+<nav class="dock" aria-label="Quick navigation">
+  <a href="#about" data-dock>About</a>
+  <a href="#skills" data-dock>Skills</a>
+  <a href="#incidents" data-dock>Incidents</a>
+  <a href="#projects" data-dock>Projects</a>
+  <a href="#experience" data-dock>Experience</a>
+  <a href="#contact" data-dock>Contact</a>
 </nav>
 
 <header class="hero">
@@ -600,270 +640,218 @@
 
     <p class="incident-group">Middleware</p>
     <div class="incidents">
-      <details class="ticket">
-        <summary class="ticket-head">
-          <span class="sev sev-1">SEV 1</span>
-          <span class="ticket-id">INC-MQ-NAS</span>
-          <span class="ticket-status">✓ RESOLVED</span>
-        <span class="chev">▸ expand</span></summary>
-        <div class="ticket-body">
+      <div class="project incident-card">
+        <button class="incident-toggle" aria-expanded="false">
+          <span class="feat">SEV 1</span>
           <h3>MQ outage caused by NAS file lock</h3>
-          <dl>
-            <dt>Impact</dt>
-            <dd>Queue manager failure disrupting message flow for banking applications.</dd>
-            <dt>Action</dt>
-            <dd>Traced the failure to a stale file lock on NAS storage backing the queue manager, coordinated with storage teams, and restored messaging safely without data loss.</dd>
-            <dt>Takeaway</dt>
-            <dd>Middleware incidents often live below the middleware — knowing the storage and OS layer is what closes P1s.</dd>
-          </dl>
+          <p class="teaser">Queue manager failure disrupting message flow for banking applications.</p>
+          <span class="incident-chev">▾</span>
+        </button>
+        <div class="incident-details">
+          <div class="incident-details-inner">
+            <p>Traced the failure to a stale file lock on NAS storage backing the queue manager, coordinated with storage teams, and restored messaging safely without data loss. Middleware incidents often live below the middleware — knowing the storage and OS layer is what closes P1s.</p>
+            <div class="tags"><span class="tag">INC-MQ-NAS</span><span class="tag">RESOLVED</span></div>
+          </div>
         </div>
-      </details>
+      </div>
     </div>
 
     <p class="incident-group">WebSphere</p>
     <div class="incidents">
-      <details class="ticket">
-        <summary class="ticket-head">
-          <span class="sev sev-1">SEV 1</span>
-          <span class="ticket-id">INC-JVM-OOM</span>
-          <span class="ticket-status">✓ RESOLVED</span>
-        <span class="chev">▸ expand</span></summary>
-        <div class="ticket-body">
+      <div class="project incident-card">
+        <button class="incident-toggle" aria-expanded="false">
+          <span class="feat">SEV 1</span>
           <h3>Application outage from JVM OutOfMemory</h3>
-          <dl>
-            <dt>Impact</dt>
-            <dd>WebSphere application server crashing under load, affecting a customer-facing banking service.</dd>
-            <dt>Action</dt>
-            <dd>Analyzed heap dumps and verbose GC logs, identified the memory pressure pattern, and drove the fix with the app team along with heap tuning to stabilize the JVM.</dd>
-            <dt>Takeaway</dt>
-            <dd>Restarting buys minutes; reading the heap dump buys a permanent fix.</dd>
-          </dl>
+          <p class="teaser">WebSphere application server crashing under load, affecting a customer-facing banking service.</p>
+          <span class="incident-chev">▾</span>
+        </button>
+        <div class="incident-details">
+          <div class="incident-details-inner">
+            <p>Analyzed heap dumps and verbose GC logs, identified the memory pressure pattern, and drove the fix with the app team along with heap tuning to stabilize the JVM. Restarting buys minutes; reading the heap dump buys a permanent fix.</p>
+            <div class="tags"><span class="tag">INC-JVM-OOM</span><span class="tag">RESOLVED</span></div>
+          </div>
         </div>
-      </details>
+      </div>
     </div>
 
     <p class="incident-group">CI/CD &amp; Automation</p>
     <div class="incidents">
-      <details class="ticket">
-        <summary class="ticket-head">
-          <span class="sev sev-2">SEV 2</span>
-          <span class="ticket-id">INC-JENKINS-PIPE</span>
-          <span class="ticket-status">✓ RESOLVED</span>
-        <span class="chev">▸ expand</span></summary>
-        <div class="ticket-body">
+      <div class="project incident-card">
+        <button class="incident-toggle" aria-expanded="false">
+          <span class="feat">SEV 2</span>
           <h3>Jenkins pipeline failure on automated deployment</h3>
-          <dl>
-            <dt>Impact</dt>
-            <dd>An automated deployment pipeline stopped completing successfully, blocking scheduled deployments and service restarts.</dd>
-            <dt>Action</dt>
-            <dd>Troubleshot the Jenkins build logs to isolate where the pipeline was failing, fixed the underlying issue on the server, and confirmed the pipeline ran cleanly end-to-end again.</dd>
-            <dt>Takeaway</dt>
-            <dd>A broken pipeline is still a production incident — it just fails silently until someone needs a deployment to go out.</dd>
-          </dl>
+          <p class="teaser">An automated deployment pipeline stopped completing successfully, blocking scheduled deployments and service restarts.</p>
+          <span class="incident-chev">▾</span>
+        </button>
+        <div class="incident-details">
+          <div class="incident-details-inner">
+            <p>Troubleshot the Jenkins build logs to isolate where the pipeline was failing, fixed the underlying issue on the server, and confirmed the pipeline ran cleanly end-to-end again. A broken pipeline is still a production incident — it just fails silently until someone needs a deployment to go out.</p>
+            <div class="tags"><span class="tag">INC-JENKINS-PIPE</span><span class="tag">RESOLVED</span></div>
+          </div>
         </div>
-      </details>
+      </div>
     </div>
 
     <p class="incident-group">Linux</p>
     <div class="incidents">
-      <details class="ticket">
-        <summary class="ticket-head">
-          <span class="sev sev-2">SEV 2</span>
-          <span class="ticket-id">INC-CPU-HIGH</span>
-          <span class="ticket-status">✓ RESOLVED</span>
-        <span class="chev">▸ expand</span></summary>
-        <div class="ticket-body">
+      <div class="project incident-card">
+        <button class="incident-toggle" aria-expanded="false">
+          <span class="feat">SEV 2</span>
           <h3>Sustained high CPU degrading application response</h3>
-          <dl>
-            <dt>Impact</dt>
-            <dd>A production Linux host ran sustained high CPU utilization, slowing response times for the applications hosted on it.</dd>
-            <dt>Action</dt>
-            <dd>Used top/ps and process-level analysis to identify the runaway process, worked with the app team to address the underlying cause, and confirmed CPU and response times returned to normal.</dd>
-            <dt>Takeaway</dt>
-            <dd>Resource exhaustion incidents usually have a single runaway process behind them — finding it fast is the whole job.</dd>
-          </dl>
+          <p class="teaser">A production Linux host ran sustained high CPU utilization, slowing response times for the applications hosted on it.</p>
+          <span class="incident-chev">▾</span>
+        </button>
+        <div class="incident-details">
+          <div class="incident-details-inner">
+            <p>Used top/ps and process-level analysis to identify the runaway process, worked with the app team to address the underlying cause, and confirmed CPU and response times returned to normal. Resource exhaustion incidents usually have a single runaway process behind them — finding it fast is the whole job.</p>
+            <div class="tags"><span class="tag">INC-CPU-HIGH</span><span class="tag">RESOLVED</span></div>
+          </div>
         </div>
-      </details>
+      </div>
 
-      <details class="ticket">
-        <summary class="ticket-head">
-          <span class="sev sev-2">SEV 2</span>
-          <span class="ticket-id">INC-DISK-FULL</span>
-          <span class="ticket-status">✓ RESOLVED</span>
-        <span class="chev">▸ expand</span></summary>
-        <div class="ticket-body">
+      <div class="project incident-card">
+        <button class="incident-toggle" aria-expanded="false">
+          <span class="feat">SEV 2</span>
           <h3>Filesystem full, halting application logging</h3>
-          <dl>
-            <dt>Impact</dt>
-            <dd>A filesystem filled to capacity, stopping application logs from writing and risking a broader service impact.</dd>
-            <dt>Action</dt>
-            <dd>Cleared archived logs to free space, restarted the affected services, and set a proactive disk-usage alert threshold to catch it earlier next time.</dd>
-            <dt>Takeaway</dt>
-            <dd>The fix is five minutes; the monitoring threshold is what stops it from becoming a recurring page.</dd>
-          </dl>
+          <p class="teaser">A filesystem filled to capacity, stopping application logs from writing and risking a broader service impact.</p>
+          <span class="incident-chev">▾</span>
+        </button>
+        <div class="incident-details">
+          <div class="incident-details-inner">
+            <p>Cleared archived logs to free space, restarted the affected services, and set a proactive disk-usage alert threshold to catch it earlier next time. The fix is five minutes; the monitoring threshold is what stops it from becoming a recurring page.</p>
+            <div class="tags"><span class="tag">INC-DISK-FULL</span><span class="tag">RESOLVED</span></div>
+          </div>
         </div>
-      </details>
+      </div>
     </div>
 
     <p class="incident-group">Security</p>
     <div class="incidents">
-      <details class="ticket">
-        <summary class="ticket-head">
-          <span class="sev sev-1">SEV 1</span>
-          <span class="ticket-id">INC-SSL-EXP</span>
-          <span class="ticket-status">✓ RESOLVED</span>
-        <span class="chev">▸ expand</span></summary>
-        <div class="ticket-body">
+      <div class="project incident-card">
+        <button class="incident-toggle" aria-expanded="false">
+          <span class="feat">SEV 1</span>
           <h3>Service failure from expired SSL certificate</h3>
-          <dl>
-            <dt>Impact</dt>
-            <dd>Secure connections failing between application components after a certificate expired.</dd>
-            <dt>Action</dt>
-            <dd>Identified the expired cert in the chain, coordinated renewal and keystore updates, and restored connectivity. Followed up with tracking so expiries were caught before they became incidents.</dd>
-            <dt>Takeaway</dt>
-            <dd>The best P1 is the one your monitoring catches thirty days early.</dd>
-          </dl>
+          <p class="teaser">Secure connections failing between application components after a certificate expired.</p>
+          <span class="incident-chev">▾</span>
+        </button>
+        <div class="incident-details">
+          <div class="incident-details-inner">
+            <p>Identified the expired cert in the chain, coordinated renewal and keystore updates, and restored connectivity. Followed up with tracking so expiries were caught before they became incidents. The best P1 is the one your monitoring catches thirty days early.</p>
+            <div class="tags"><span class="tag">INC-SSL-EXP</span><span class="tag">RESOLVED</span></div>
+          </div>
         </div>
-      </details>
+      </div>
     </div>
 
     <p class="incident-group">Release Management</p>
     <div class="incidents">
-      <details class="ticket">
-        <summary class="ticket-head">
-          <span class="sev sev-1">SEV 1</span>
-          <span class="ticket-id">INC-DEPLOY-RB</span>
-          <span class="ticket-status">✓ RESOLVED</span>
-        <span class="chev">▸ expand</span></summary>
-        <div class="ticket-body">
+      <div class="project incident-card">
+        <button class="incident-toggle" aria-expanded="false">
+          <span class="feat">SEV 1</span>
           <h3>Failed production deployment requiring rollback</h3>
-          <dl>
-            <dt>Impact</dt>
-            <dd>A production deployment introduced application errors affecting service availability shortly after go-live.</dd>
-            <dt>Action</dt>
-            <dd>Executed the pre-planned rollback, validated services were restored to the last known good state, coordinated with the development team on the root cause, and opened an RCA for follow-up.</dd>
-            <dt>Takeaway</dt>
-            <dd>A deployment without a tested rollback plan isn't really a deployment plan — it's a gamble with an extra step.</dd>
-          </dl>
+          <p class="teaser">A production deployment introduced application errors affecting service availability shortly after go-live.</p>
+          <span class="incident-chev">▾</span>
+        </button>
+        <div class="incident-details">
+          <div class="incident-details-inner">
+            <p>Executed the pre-planned rollback, validated services were restored to the last known good state, coordinated with the development team on the root cause, and opened an RCA for follow-up. A deployment without a tested rollback plan isn't really a deployment plan — it's a gamble with an extra step.</p>
+            <div class="tags"><span class="tag">INC-DEPLOY-RB</span><span class="tag">RESOLVED</span></div>
+          </div>
         </div>
-      </details>
+      </div>
 
-      <details class="ticket">
-        <summary class="ticket-head">
-          <span class="sev sev-2">EMERGENCY</span>
-          <span class="ticket-id">CHG-EMERG</span>
-          <span class="ticket-status">✓ COMPLETED</span>
-        <span class="chev">▸ expand</span></summary>
-        <div class="ticket-body">
+      <div class="project incident-card">
+        <button class="incident-toggle" aria-expanded="false">
+          <span class="feat">EMERGENCY</span>
           <h3>Weekend emergency change under CAB approval</h3>
-          <dl>
-            <dt>Context</dt>
-            <dd>A production issue required a fix outside the standard change window, going through expedited CAB (Change Advisory Board) approval for an emergency deployment.</dd>
-            <dt>Action</dt>
-            <dd>Prepared the change and rollback plan on short notice, got emergency approval, executed the deployment, and validated the fix before closing out the change.</dd>
-            <dt>Takeaway</dt>
-            <dd>Emergency changes still need a rollback plan — "urgent" is not a substitute for "tested."</dd>
-          </dl>
+          <p class="teaser">A production issue required a fix outside the standard change window, going through expedited CAB (Change Advisory Board) approval for an emergency deployment.</p>
+          <span class="incident-chev">▾</span>
+        </button>
+        <div class="incident-details">
+          <div class="incident-details-inner">
+            <p>Prepared the change and rollback plan on short notice, got emergency approval, executed the deployment, and validated the fix before closing out the change. Emergency changes still need a rollback plan — "urgent" is not a substitute for "tested."</p>
+            <div class="tags"><span class="tag">CHG-EMERG</span><span class="tag">COMPLETED</span></div>
+          </div>
         </div>
-      </details>
+      </div>
     </div>
 
     <p class="incident-group">Operations</p>
     <div class="incidents">
-      <details class="ticket">
-        <summary class="ticket-head">
-          <span class="sev sev-2">SEV 2</span>
-          <span class="ticket-id">INC-DB-CONN</span>
-          <span class="ticket-status">✓ RESOLVED</span>
-        <span class="chev">▸ expand</span></summary>
-        <div class="ticket-body">
+      <div class="project incident-card">
+        <button class="incident-toggle" aria-expanded="false">
+          <span class="feat">SEV 2</span>
           <h3>Database connectivity failure from exhausted connection pool</h3>
-          <dl>
-            <dt>Impact</dt>
-            <dd>Applications began failing to reach the database after the connection pool was exhausted.</dd>
-            <dt>Action</dt>
-            <dd>Investigated the listener and connection pool state, restarted the affected services, and validated that transactions resumed processing normally.</dd>
-            <dt>Takeaway</dt>
-            <dd>Connection pool exhaustion is a symptom — the real question is what stopped releasing connections upstream.</dd>
-          </dl>
+          <p class="teaser">Applications began failing to reach the database after the connection pool was exhausted.</p>
+          <span class="incident-chev">▾</span>
+        </button>
+        <div class="incident-details">
+          <div class="incident-details-inner">
+            <p>Investigated the listener and connection pool state, restarted the affected services, and validated that transactions resumed processing normally. Connection pool exhaustion is a symptom — the real question is what stopped releasing connections upstream.</p>
+            <div class="tags"><span class="tag">INC-DB-CONN</span><span class="tag">RESOLVED</span></div>
+          </div>
         </div>
-      </details>
+      </div>
 
-      <details class="ticket">
-        <summary class="ticket-head">
-          <span class="sev sev-2">MONITORING</span>
-          <span class="ticket-id">INC-APM-ALERT</span>
-          <span class="ticket-status">✓ RESOLVED</span>
-        <span class="chev">▸ expand</span></summary>
-        <div class="ticket-body">
+      <div class="project incident-card">
+        <button class="incident-toggle" aria-expanded="false">
+          <span class="feat">MONITORING</span>
           <h3>AppDynamics/Datadog alert investigation</h3>
-          <dl>
-            <dt>Impact</dt>
-            <dd>A latency spike alert fired in AppDynamics/Datadog, requiring investigation before it escalated into a customer-facing issue.</dd>
-            <dt>Action</dt>
-            <dd>Traced the alert through APM transaction traces to isolate the slow component, ruled out a false positive, and worked with the app team on the underlying fix.</dd>
-            <dt>Takeaway</dt>
-            <dd>Good monitoring produces alerts you have to investigate, not just ones you have to silence.</dd>
-          </dl>
+          <p class="teaser">A latency spike alert fired in AppDynamics/Datadog, requiring investigation before it escalated into a customer-facing issue.</p>
+          <span class="incident-chev">▾</span>
+        </button>
+        <div class="incident-details">
+          <div class="incident-details-inner">
+            <p>Traced the alert through APM transaction traces to isolate the slow component, ruled out a false positive, and worked with the app team on the underlying fix. Good monitoring produces alerts you have to investigate, not just ones you have to silence.</p>
+            <div class="tags"><span class="tag">INC-APM-ALERT</span><span class="tag">RESOLVED</span></div>
+          </div>
         </div>
-      </details>
+      </div>
 
-      <details class="ticket">
-        <summary class="ticket-head">
-          <span class="sev sev-2">SEV 2</span>
-          <span class="ticket-id">INC-PERF-DEGR</span>
-          <span class="ticket-status">✓ RESOLVED</span>
-        <span class="chev">▸ expand</span></summary>
-        <div class="ticket-body">
+      <div class="project incident-card">
+        <button class="incident-toggle" aria-expanded="false">
+          <span class="feat">SEV 2</span>
           <h3>Application performance degradation under load</h3>
-          <dl>
-            <dt>Impact</dt>
-            <dd>Application response times degraded noticeably under production load, short of a full outage but affecting user experience.</dd>
-            <dt>Action</dt>
-            <dd>Identified a thread pool bottleneck through monitoring and thread dump analysis, adjusted JVM/thread pool configuration, and validated response times returned to normal.</dd>
-            <dt>Takeaway</dt>
-            <dd>Not every incident is down/up — slow is still an incident, and it's often the harder one to diagnose.</dd>
-          </dl>
+          <p class="teaser">Application response times degraded noticeably under production load, short of a full outage but affecting user experience.</p>
+          <span class="incident-chev">▾</span>
+        </button>
+        <div class="incident-details">
+          <div class="incident-details-inner">
+            <p>Identified a thread pool bottleneck through monitoring and thread dump analysis, adjusted JVM/thread pool configuration, and validated response times returned to normal. Not every incident is down/up — slow is still an incident, and it's often the harder one to diagnose.</p>
+            <div class="tags"><span class="tag">INC-PERF-DEGR</span><span class="tag">RESOLVED</span></div>
+          </div>
         </div>
-      </details>
+      </div>
 
-      <details class="ticket">
-        <summary class="ticket-head">
-          <span class="sev sev-2">DR EXERCISE</span>
-          <span class="ticket-id">DR-FAILOVER</span>
-          <span class="ticket-status">✓ COMPLETED</span>
-        <span class="chev">▸ expand</span></summary>
-        <div class="ticket-body">
+      <div class="project incident-card">
+        <button class="incident-toggle" aria-expanded="false">
+          <span class="feat">DR EXERCISE</span>
           <h3>Disaster recovery check call and failover validation</h3>
-          <dl>
-            <dt>Context</dt>
-            <dd>Participated in scheduled DR check calls and failover testing to validate recovery readiness for banking application environments.</dd>
-            <dt>Action</dt>
-            <dd>Monitored application failover and database synchronization during the exercise, supported business validation of recovered services, and confirmed recovery met expected timelines.</dd>
-            <dt>Takeaway</dt>
-            <dd>DR only works if it's rehearsed — the exercise is where you find the gaps the runbook didn't mention.</dd>
-          </dl>
+          <p class="teaser">Participated in scheduled DR check calls and failover testing to validate recovery readiness for banking application environments.</p>
+          <span class="incident-chev">▾</span>
+        </button>
+        <div class="incident-details">
+          <div class="incident-details-inner">
+            <p>Monitored application failover and database synchronization during the exercise, supported business validation of recovered services, and confirmed recovery met expected timelines. DR only works if it's rehearsed — the exercise is where you find the gaps the runbook didn't mention.</p>
+            <div class="tags"><span class="tag">DR-FAILOVER</span><span class="tag">COMPLETED</span></div>
+          </div>
         </div>
-      </details>
+      </div>
 
-      <details class="ticket">
-        <summary class="ticket-head">
-          <span class="sev sev-2">CHANGE</span>
-          <span class="ticket-id">CHG-X8-SOLO</span>
-          <span class="ticket-status">✓ COMPLETED</span>
-        <span class="chev">▸ expand</span></summary>
-        <div class="ticket-body">
+      <div class="project incident-card">
+        <button class="incident-toggle" aria-expanded="false">
+          <span class="feat">CHANGE</span>
           <h3>Eight critical changes executed solo in one window</h3>
-          <dl>
-            <dt>Context</dt>
-            <dd>A change window where I was the sole engineer responsible for executing eight critical production changes.</dd>
-            <dt>Action</dt>
-            <dd>Planned sequencing and rollback for each change, executed methodically with verification at every step, and completed all eight without incident. Separately caught a near double-deployment before it hit production.</dd>
-            <dt>Takeaway</dt>
-            <dd>Checklists and rollback plans are what let one person safely do the work of a team.</dd>
-          </dl>
+          <p class="teaser">A change window where I was the sole engineer responsible for executing eight critical production changes.</p>
+          <span class="incident-chev">▾</span>
+        </button>
+        <div class="incident-details">
+          <div class="incident-details-inner">
+            <p>Planned sequencing and rollback for each change, executed methodically with verification at every step, and completed all eight without incident. Separately caught a near double-deployment before it hit production. Checklists and rollback plans are what let one person safely do the work of a team.</p>
+            <div class="tags"><span class="tag">CHG-X8-SOLO</span><span class="tag">COMPLETED</span></div>
+          </div>
         </div>
-      </details>
+      </div>
     </div>
   </div>
 </section>
@@ -1026,7 +1014,7 @@
 <footer id="contact">
   <div class="wrap reveal">
     <p class="eyebrow">Contact</p>
-    <h2>Get in touch</h2>
+    <h2>Let's build reliable systems together.</h2>
     <p class="lede">Open to production support, middleware, and cloud operations roles in the Greater Toronto Area or remote across Canada.</p>
     <div class="tags" style="margin-top:16px">
       <span class="tag">Production Support</span><span class="tag">Middleware Engineering</span>
@@ -1067,6 +1055,40 @@
         btn.setAttribute('aria-expanded','false');
       });
     });
+  })();
+  (function(){
+    document.querySelectorAll('.incident-toggle').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var details = btn.nextElementSibling;
+        var isOpen = btn.getAttribute('aria-expanded') === 'true';
+        if (isOpen) {
+          details.style.maxHeight = null;
+          btn.setAttribute('aria-expanded', 'false');
+        } else {
+          details.style.maxHeight = details.scrollHeight + 'px';
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  })();
+  (function(){
+    var dockLinks = document.querySelectorAll('.dock a[data-dock]');
+    if(!dockLinks.length) return;
+    var sections = Array.from(dockLinks).map(function(a){
+      return document.querySelector(a.getAttribute('href'));
+    }).filter(Boolean);
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var id = '#' + entry.target.id;
+        var link = document.querySelector('.dock a[href="' + id + '"]');
+        if(!link) return;
+        if(entry.isIntersecting){
+          dockLinks.forEach(function(l){ l.classList.remove('active'); });
+          link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -50% 0px' });
+    sections.forEach(function(s){ io.observe(s); });
   })();
 </script>
 
