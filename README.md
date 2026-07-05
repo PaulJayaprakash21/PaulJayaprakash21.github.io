@@ -1,0 +1,51 @@
+# Paul Gomez — Portfolio
+
+Personal portfolio site: production support & middleware engineer (IBM WebSphere, IBM MQ) building toward Azure cloud engineering.
+
+**Live site:** https://YOUR-USERNAME.github.io
+
+## Stack
+
+Plain HTML and CSS, no frameworks, no build step. Hosted free on GitHub Pages.
+
+## Structure
+
+```
+.
+├── index.html    # the entire site (styles embedded)
+└── README.md
+```
+
+## Deploying (GitHub Pages)
+
+1. Create a repository named exactly `YOUR-USERNAME.github.io` (replace with your GitHub username).
+2. Push this code:
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial portfolio"
+   git branch -M main
+   git remote add origin https://github.com/YOUR-USERNAME/YOUR-USERNAME.github.io.git
+   git push -u origin main
+   ```
+3. In the repo: **Settings → Pages → Source: Deploy from a branch → main / (root)**.
+4. The site goes live at `https://YOUR-USERNAME.github.io` within a couple of minutes.
+
+## Related lab repos
+
+The Azure lab projects linked from the site live in their own repositories:
+
+- `azure-acr-fastapi` — FastAPI app containerized and pushed to Azure Container Registry
+- `azure-aks-lab` — AKS cluster setup and workload deployment notes
+- `azure-traffic-manager-lab` — multi-region routing across Australia East / Canada East
+- `azure-service-bus-lab` — Service Bus queues & topics, compared against IBM MQ
+- `azure-iac-lab` — Terraform and ARM templates via Azure DevOps
+
+## Updating content
+
+Everything is in `index.html`. Placeholders to replace before going live:
+
+- `YOUR-LINKEDIN` — LinkedIn profile URL
+- `YOUR-GITHUB` — GitHub username (appears in header + all project links)
+- `your.email@example.com` — contact email (appears twice: header + footer)
+- Resume PDF link in the header nav
