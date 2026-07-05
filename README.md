@@ -43,9 +43,8 @@ The Azure lab projects linked from the site live in their own repositories:
 
 ## Updating content
 
+All contact details are baked into `index.html`. No placeholders remain.
+
 Everything is in `index.html`. Placeholders to replace before going live:
 
-- `YOUR-LINKEDIN` — LinkedIn profile URL
 
-- `your.email@example.com` — contact email (appears twice: header + footer)
-- Resume PDF link in the header nav
