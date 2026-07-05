@@ -2,7 +2,7 @@
 
 Personal portfolio site: production support & middleware engineer (IBM WebSphere, IBM MQ) building toward Azure cloud engineering.
 
-**Live site:** https://YOUR-USERNAME.github.io
+**Live site:** https://pauljayaprakash21.github.io
 
 ## Stack
 
@@ -18,18 +18,18 @@ Plain HTML and CSS, no frameworks, no build step. Hosted free on GitHub Pages.
 
 ## Deploying (GitHub Pages)
 
-1. Create a repository named exactly `YOUR-USERNAME.github.io` (replace with your GitHub username).
+1. Rename the repository to exactly `PaulJayaprakash21.github.io` (Settings → Repository name).
 2. Push this code:
    ```bash
    git init
    git add .
    git commit -m "Initial portfolio"
    git branch -M main
-   git remote add origin https://github.com/YOUR-USERNAME/YOUR-USERNAME.github.io.git
+   git remote add origin https://github.com/PaulJayaprakash21/PaulJayaprakash21.github.io.git
    git push -u origin main
    ```
 3. In the repo: **Settings → Pages → Source: Deploy from a branch → main / (root)**.
-4. The site goes live at `https://YOUR-USERNAME.github.io` within a couple of minutes.
+4. The site goes live at `https://pauljayaprakash21.github.io` within a couple of minutes.
 
 ## Related lab repos
 
@@ -46,6 +46,6 @@ The Azure lab projects linked from the site live in their own repositories:
 Everything is in `index.html`. Placeholders to replace before going live:
 
 - `YOUR-LINKEDIN` — LinkedIn profile URL
-- `YOUR-GITHUB` — GitHub username (appears in header + all project links)
+
 - `your.email@example.com` — contact email (appears twice: header + footer)
 - Resume PDF link in the header nav
