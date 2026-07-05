@@ -131,7 +131,7 @@
   }
   .eyebrow::after{content:"";height:1px;width:56px;background:linear-gradient(90deg,var(--cyan),transparent)}
   h2{font-size:clamp(26px,4vw,34px);font-weight:700;letter-spacing:-0.02em;margin-bottom:18px}
-  .lede{color:var(--muted);font-size:16.5px}
+  .lede{color:var(--muted);font-size:18px;line-height:1.75}
   .lede strong{color:var(--text);font-weight:600}
   .lede,.ticket-body dd,.skill p,.project p,.job li{
     text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto
@@ -139,9 +139,11 @@
 
   /* ---------- tool logo grid ---------- */
   .toolgrid{
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:14px;
+    display:grid;grid-template-columns:repeat(10,1fr);gap:14px;
     margin-top:36px;margin-bottom:14px
   }
+  @media (max-width:1000px){.toolgrid{grid-template-columns:repeat(5,1fr)}}
+  @media (max-width:620px){.toolgrid{grid-template-columns:repeat(4,1fr)}}
   .tool{
     background:var(--panel);border:1px solid var(--line);border-radius:12px;
     padding:18px 10px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;
@@ -160,7 +162,9 @@
   .co-logo img{max-width:100%;max-height:100%;object-fit:contain}
 
   /* ---------- skills ---------- */
-  .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:36px}
+  .skills{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:36px}
+  @media (max-width:1100px){.skills{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:640px){.skills{grid-template-columns:1fr}}
   .skill{
     background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px;
     transition:border-color .2s, transform .2s, box-shadow .2s;position:relative;overflow:hidden
@@ -299,12 +303,11 @@
 
 <header class="hero">
   <div class="wrap">
-    <p class="statusline"><span class="dot" aria-hidden="true"></span>STATUS: OPERATIONAL · TORONTO, ONTARIO · OPEN TO OPPORTUNITIES</p>
+    <p class="statusline">TORONTO, ONTARIO, CANADA</p>
     <h1>Paul Udayan <span class="grad">Gomez Jayaprakash</span></h1>
     <p class="role"><strong>Production Support &amp; Middleware Engineer</strong> <span class="arrow">→</span> building toward Azure cloud engineering. Three years keeping banking systems online, 24/7.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="mailto:jayaprakashpaul21@gmail.com">Get in touch</a>
-      <a class="btn btn-ghost" href="https://github.com/PaulJayaprakash21">GitHub</a>
+      <a class="btn btn-primary" href="https://github.com/PaulJayaprakash21">GitHub</a>
       <a class="btn btn-ghost" href="https://www.linkedin.com/in/paul-gomez21">LinkedIn</a>
     </div>
   </div>
@@ -313,9 +316,8 @@
 <div class="wrap">
   <div class="stats reveal">
     <div class="stat"><div class="num">3+ yrs</div><div class="lbl">Enterprise production support for financial services platforms</div></div>
-    <div class="stat"><div class="num">24/7</div><div class="lbl">High-pressure banking production environment, rotating-shift L2 ops</div></div>
-    <div class="stat"><div class="num">3×</div><div class="lbl">Rated top performer at Cognizant — all three years</div></div>
-    <div class="stat"><div class="num">0</div><div class="lbl">Outages or errors from production changes I executed and deployed</div></div>
+    <div class="stat"><div class="num">24/7</div><div class="lbl">High-pressure banking production environment — changes executed and deployed without errors or outages</div></div>
+    <div class="stat"><div class="num">3×</div><div class="lbl">Rated top performer at Cognizant all three years, with multiple client appreciations</div></div>
   </div>
 </div>
 
@@ -331,12 +333,9 @@
       incidents under SLA, performing post-release checkouts and disaster recovery testing, and acting as SME to
       senior stakeholders. Since relocating to Canada, I completed a postgraduate program at Georgian College
       (Big Data Analytics &amp; AI, with Honors) and shifted my hands-on work to <strong>Microsoft Azure</strong>:
-      AKS, container registries, Service Bus, Traffic Manager, Terraform, and Azure DevOps pipelines. AZ-900
-      certified (921/1000), ITIL v3 Foundation, and preparing for AZ-104.
-    </p>
-    <p class="lede" style="margin-top:14px;font-size:14.5px">
-      Everything on this page is something I've actually done and can walk you through in detail — no inflated
-      metrics, no borrowed war stories.
+      AKS, container registries, Service Bus, Traffic Manager, Terraform, and Azure DevOps pipelines — alongside
+      <strong>AWS</strong> certifications through AWS Academy and data &amp; analytics work with SQL, Power BI and
+      Tableau. AZ-900 certified (921/1000) and ITIL v3 Foundation certified.
     </p>
   </div>
 </section>
@@ -362,23 +361,35 @@
       <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" loading="lazy"><span>Git</span></div>
       <div class="tool"><img src="https://cdn.simpleicons.org/github/E8EFF8" alt="GitHub" loading="lazy"><span>GitHub</span></div>
       <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" alt="Jira" loading="lazy"><span>Jira</span></div>
+      <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="Amazon Web Services" loading="lazy"><span>AWS</span></div>
+      <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azuresqldatabase/azuresqldatabase-original.svg" alt="SQL" loading="lazy"><span>SQL</span></div>
+      <div class="tool"><img src="assets/powerbi-logo.png" alt="Power BI" loading="lazy" onerror="this.style.display='none'"><span>Power BI</span></div>
+      <div class="tool"><img src="assets/tableau-logo.png" alt="Tableau" loading="lazy" onerror="this.style.display='none'"><span>Tableau</span></div>
     </div>
     <div class="skills">
       <div class="skill">
         <h3><span class="ico">⌬</span>Middleware &amp; App Servers</h3>
-        <p>IBM WebSphere Application Server, IBM MQ (queue managers, channels, listeners), Apache Tomcat, JVM tuning and heap/OOM analysis.</p>
+        <p>IBM WebSphere Application Server, IBM MQ (queue managers, channels, listeners), Apache Tomcat, JVM tuning, heap/OOM and GC log analysis, SSL certificate and keystore management.</p>
       </div>
       <div class="skill">
         <h3><span class="ico">◉</span>Monitoring &amp; Observability</h3>
-        <p>Datadog, AppDynamics, Prometheus, Grafana — application health monitoring, log analysis, alert management, anomaly detection, performance diagnostics.</p>
+        <p>Datadog, AppDynamics, Prometheus, Grafana — application health monitoring, log analysis, alert management and tuning, anomaly detection, performance diagnostics, dashboard building.</p>
       </div>
       <div class="skill">
-        <h3><span class="ico">☁</span>Cloud (Azure)</h3>
-        <p>AKS, Azure Container Registry, Service Bus, Traffic Manager, App Services, Azure Monitor, ARM templates, Terraform, Azure DevOps &amp; Git.</p>
+        <h3><span class="ico">☁</span>Cloud — Azure</h3>
+        <p>AKS, Azure Container Registry, Service Bus, Traffic Manager, App Services, Azure Monitor, ARM templates, Terraform, Azure DevOps &amp; Git. AZ-900 certified (921/1000).</p>
+      </div>
+      <div class="skill">
+        <h3><span class="ico">☁</span>Cloud — AWS</h3>
+        <p>AWS Academy certified across Cloud Foundations, Cloud Architecting, Data Engineering and Machine Learning Foundations — core services, architecture patterns and data pipelines.</p>
       </div>
       <div class="skill">
         <h3><span class="ico">&gt;_</span>OS &amp; Scripting</h3>
-        <p>Linux / RHEL administration, Bash scripting for log analysis and operational automation, SQL, JSON, Python, Docker.</p>
+        <p>Linux / RHEL administration, Bash scripting for log analysis and operational automation, Python, Docker, JSON, Git-based workflows.</p>
+      </div>
+      <div class="skill">
+        <h3><span class="ico">▦</span>Data &amp; Dashboards</h3>
+        <p>SQL for querying and analysis, Power BI and Tableau dashboards built for academic and stakeholder-facing projects, including an ML-driven crop yield dashboard deployed on Azure.</p>
       </div>
       <div class="skill">
         <h3><span class="ico">⎈</span>ITSM &amp; Process</h3>
@@ -482,7 +493,7 @@
   <div class="wrap reveal">
     <p class="eyebrow">Projects &amp; Lab Work</p>
     <h2>Things I've built</h2>
-    <p class="lede">Featured projects plus self-directed Azure labs built while preparing for AZ-104.</p>
+    <p class="lede">Featured projects plus self-directed Azure hands-on labs.</p>
     <div class="projects">
       <article class="project">
         <span class="feat">Featured</span>
