@@ -1,4 +1,4 @@
-# Paul Gomez — Portfolio
+# Paul Udayan Gomez Jayaprakash — Portfolio
 
 Personal portfolio site: production support & middleware engineer (IBM WebSphere, IBM MQ) building toward Azure cloud engineering.
 
