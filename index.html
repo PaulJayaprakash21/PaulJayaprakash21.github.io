@@ -24,7 +24,7 @@
     --ok:#34D399;
     --sev1:#F87171;
     --warn:#FBBF24;
-    --maxw:1080px;
+    --maxw:1240px;
     --sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
     --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,monospace;
   }
@@ -64,7 +64,11 @@
   @media (max-width:760px){.nav-links{display:none}}
 
   /* ---------- hero ---------- */
-  .hero{padding:96px 0 72px;position:relative}
+  .hero{
+    min-height:calc(100vh - 60px);display:flex;align-items:center;
+    padding:64px 0;position:relative;text-align:center
+  }
+  .hero .wrap{width:100%}
   .statusline{
     display:inline-flex;align-items:center;gap:9px;
     font-family:var(--mono);font-size:12.5px;color:var(--muted);
@@ -79,16 +83,16 @@
   @keyframes pulse{0%{transform:scale(.6);opacity:.7}100%{transform:scale(1.5);opacity:0}}
   h1{
     font-size:clamp(30px,5.2vw,54px);font-weight:700;letter-spacing:-0.03em;line-height:1.12;
-    margin-bottom:18px;max-width:20ch
+    margin:0 auto 18px;max-width:20ch
   }
   h1 .grad{
     background:linear-gradient(92deg,var(--blue) 0%,var(--cyan) 100%);
     -webkit-background-clip:text;background-clip:text;color:transparent
   }
-  .hero .role{font-size:clamp(18px,2.6vw,23px);color:var(--muted);font-weight:500;max-width:38ch}
+  .hero .role{font-size:clamp(18px,2.6vw,23px);color:var(--muted);font-weight:500;max-width:44ch;margin:0 auto}
   .hero .role strong{color:var(--text);font-weight:600}
   .hero .role .arrow{color:var(--cyan)}
-  .hero-cta{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap}
+  .hero-cta{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
   .btn{
     display:inline-flex;align-items:center;gap:8px;
     font-weight:600;font-size:15px;padding:12px 22px;border-radius:8px;
@@ -127,8 +131,11 @@
   }
   .eyebrow::after{content:"";height:1px;width:56px;background:linear-gradient(90deg,var(--cyan),transparent)}
   h2{font-size:clamp(26px,4vw,34px);font-weight:700;letter-spacing:-0.02em;margin-bottom:18px}
-  .lede{max-width:72ch;color:var(--muted);font-size:16.5px}
+  .lede{color:var(--muted);font-size:16.5px}
   .lede strong{color:var(--text);font-weight:600}
+  .lede,.ticket-body dd,.skill p,.project p,.job li{
+    text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto
+  }
 
   /* ---------- tool logo grid ---------- */
   .toolgrid{
@@ -235,7 +242,7 @@
   .job-head h3{font-size:18px;font-weight:600}
   .job-head .org{color:var(--muted);font-weight:400}
   .dates{font-family:var(--mono);font-size:13px;color:var(--faint);white-space:nowrap;padding-top:4px}
-  .job ul{list-style:none;display:grid;gap:9px;max-width:78ch;margin-top:10px}
+  .job ul{list-style:none;display:grid;gap:9px;margin-top:10px}
   .job li{padding-left:20px;position:relative;font-size:15px;color:var(--muted)}
   .job li::before{content:"";position:absolute;left:0;top:11px;width:9px;height:2px;background:var(--cyan)}
   .job .sub{font-size:14px;color:var(--faint);font-style:italic}
@@ -306,9 +313,9 @@
 <div class="wrap">
   <div class="stats reveal">
     <div class="stat"><div class="num">3+ yrs</div><div class="lbl">Enterprise production support for financial services platforms</div></div>
-    <div class="stat"><div class="num">24/7</div><div class="lbl">Rotating-shift L2 operations under strict SLAs</div></div>
-    <div class="stat"><div class="num">921/1000</div><div class="lbl">AZ-900 Microsoft Azure Fundamentals score</div></div>
-    <div class="stat"><div class="num">8</div><div class="lbl">Critical production changes executed solo in one window</div></div>
+    <div class="stat"><div class="num">24/7</div><div class="lbl">High-pressure banking production environment, rotating-shift L2 ops</div></div>
+    <div class="stat"><div class="num">3×</div><div class="lbl">Rated top performer at Cognizant — all three years</div></div>
+    <div class="stat"><div class="num">0</div><div class="lbl">Outages or errors from production changes I executed and deployed</div></div>
   </div>
 </div>
 
@@ -545,7 +552,8 @@
           <li>Acted as SME to senior stakeholders on IBM WebSphere, IBM MQ and production support processes, operating with independence of judgement.</li>
           <li>Performed post-release checkouts after application releases and infrastructure updates; participated in disaster recovery testing and release activities through to production.</li>
           <li>Monitored application health with AppDynamics and Datadog; administered Linux/RHEL servers and wrote Bash scripts for log analysis and operational automation.</li>
-          <li>Executed production changes end-to-end under formal change management, including complex multi-change windows handled solo.</li>
+          <li>Executed production changes end-to-end under formal change management with zero errors or outages, including complex multi-change windows handled solo.</li>
+          <li>Rated a top performer for all three years and received multiple client appreciations for incident handling and support quality.</li>
         </ul>
       </div>
       <div class="job">
