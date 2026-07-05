@@ -82,13 +82,10 @@
   }
   @keyframes pulse{0%{transform:scale(.6);opacity:.7}100%{transform:scale(1.5);opacity:0}}
   h1{
-    font-size:clamp(30px,5.2vw,54px);font-weight:700;letter-spacing:-0.03em;line-height:1.12;
-    margin:0 auto 18px;max-width:20ch
+    font-size:clamp(24px,4vw,44px);font-weight:700;letter-spacing:-0.02em;line-height:1.15;
+    margin:0 auto 18px;white-space:nowrap
   }
-  h1 .grad{
-    background:linear-gradient(92deg,var(--blue) 0%,var(--cyan) 100%);
-    -webkit-background-clip:text;background-clip:text;color:transparent
-  }
+  @media (max-width:680px){h1{white-space:normal;font-size:clamp(24px,7vw,36px)}}
   .hero .role{font-size:clamp(18px,2.6vw,23px);color:var(--muted);font-weight:500;max-width:44ch;margin:0 auto}
   .hero .role strong{color:var(--text);font-weight:600}
   .hero .role .arrow{color:var(--cyan)}
@@ -303,13 +300,13 @@
 
 <header class="hero">
   <div class="wrap">
-    <p class="statusline">TORONTO, ONTARIO, CANADA</p>
-    <h1>Paul Udayan <span class="grad">Gomez Jayaprakash</span></h1>
+    <h1>Paul Udayan Gomez Jayaprakash</h1>
     <p class="role"><strong>Production Support &amp; Middleware Engineer</strong> <span class="arrow">→</span> building toward Azure cloud engineering. Three years keeping banking systems online, 24/7.</p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="https://github.com/PaulJayaprakash21">GitHub</a>
       <a class="btn btn-ghost" href="https://www.linkedin.com/in/paul-gomez21">LinkedIn</a>
     </div>
+    <p class="statusline" style="margin-top:28px;margin-bottom:0">TORONTO, ONTARIO, CANADA</p>
   </div>
 </header>
 
