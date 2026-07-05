@@ -78,6 +78,9 @@
     padding:64px 0;position:relative;text-align:center
   }
   .hero .wrap{width:100%}
+  @media (max-width:760px){
+    .hero{min-height:auto;padding:56px 0 64px}
+  }
   .statusline{
     display:inline-flex;align-items:center;gap:9px;
     font-family:var(--mono);font-size:12.5px;color:var(--muted);
@@ -146,8 +149,9 @@
   /* ---------- skyline background ---------- */
   .skyline{
     position:absolute;left:0;right:0;bottom:0;width:100%;
-    height:min(72vh,620px);pointer-events:none;z-index:0
+    height:100%;pointer-events:none;z-index:0
   }
+  @media (max-width:640px){ .tower-antenna{display:none} }
   .hero{overflow:hidden}
   .hero::after{
     content:"";position:absolute;left:0;right:0;bottom:0;height:40%;
@@ -218,6 +222,11 @@
   .skill p{font-size:14.5px;color:var(--muted)}
 
   /* ---------- incident log ---------- */
+  .incident-group{
+    font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--faint);margin:36px 0 -6px
+  }
+  .incident-group:first-child{margin-top:8px}
   .incidents{display:grid;gap:20px;margin-top:36px}
   .ticket{
     background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;
@@ -439,14 +448,16 @@
     </g>
 
     <!-- CN Tower -->
+    <g fill="url(#towerFill)" class="tower-antenna">
+      <rect x="735" y="90" width="8" height="95"/>
+    </g>
+    <circle cx="739" cy="90" r="4" fill="#F87171" opacity=".9" class="tower-antenna"/>
     <g fill="url(#towerFill)">
       <rect x="730" y="180" width="18" height="520"/>
       <path d="M 690 300 L 788 300 L 762 340 L 716 340 Z"/>
       <path d="M 705 340 L 773 340 L 758 370 L 720 370 Z"/>
       <ellipse cx="739" cy="220" rx="26" ry="14"/>
-      <rect x="735" y="90" width="8" height="95"/>
     </g>
-    <circle cx="739" cy="90" r="4" fill="#F87171" opacity=".9"/>
   </svg>
   <div class="wrap">
     <h1>Paul Udayan Gomez Jayaprakash</h1>
@@ -558,10 +569,11 @@
       <div class="skill">
         <h3><span class="ico">▣</span>Tech Stack at Cognizant</h3>
         <p style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px">
-          <span class="tag">IBM WebSphere ND</span><span class="tag">IBM MQ</span><span class="tag">Apache Tomcat</span>
+          <span class="tag">IBM WebSphere ND</span><span class="tag">IBM MQ</span><span class="tag">Apache (Web Server)</span>
+          <span class="tag">Apache Tomcat (App Server)</span><span class="tag">Jenkins</span><span class="tag">Ansible</span>
           <span class="tag">Linux / RHEL</span><span class="tag">AppDynamics</span><span class="tag">Datadog</span>
           <span class="tag">ServiceNow</span><span class="tag">JIRA</span><span class="tag">SSL</span>
-          <span class="tag">JVM / GC Logs</span><span class="tag">Heap Dumps</span><span class="tag">Bash</span>
+          <span class="tag">JVM / GC Logs</span><span class="tag">Bash</span><span class="tag">Microsoft Office</span>
         </p>
       </div>
       <div class="skill">
@@ -570,7 +582,10 @@
           <span class="tag">Incident Management</span><span class="tag">Problem Management</span><span class="tag">Change Management</span>
           <span class="tag">Release Validation</span><span class="tag">Disaster Recovery</span><span class="tag">Middleware Admin</span>
           <span class="tag">Monitoring</span><span class="tag">Automation</span><span class="tag">RCA Documentation</span>
-          <span class="tag">Stakeholder Communication</span>
+          <span class="tag">Stakeholder Communication</span><span class="tag">WAS Patching &amp; Fix Packs</span>
+          <span class="tag">MQ Object Creation/Deletion</span><span class="tag">App Deployment &amp; Decommissioning</span>
+          <span class="tag">DR Check Calls</span><span class="tag">Code Red / Severity Bridge Calls</span>
+          <span class="tag">Client &amp; Stakeholder Troubleshooting</span><span class="tag">DB Password Resets</span>
         </p>
       </div>
     </div>
@@ -583,6 +598,7 @@
     <h2>Real incidents, real resolutions</h2>
     <p class="lede">A selection of production incidents I owned or played a key role in at Cognizant. Details are generalized to respect client confidentiality — happy to walk through any of them in depth.</p>
 
+    <p class="incident-group">Middleware</p>
     <div class="incidents">
       <details class="ticket">
         <summary class="ticket-head">
@@ -602,7 +618,10 @@
           </dl>
         </div>
       </details>
+    </div>
 
+    <p class="incident-group">WebSphere</p>
+    <div class="incidents">
       <details class="ticket">
         <summary class="ticket-head">
           <span class="sev sev-1">SEV 1</span>
@@ -621,7 +640,73 @@
           </dl>
         </div>
       </details>
+    </div>
 
+    <p class="incident-group">CI/CD &amp; Automation</p>
+    <div class="incidents">
+      <details class="ticket">
+        <summary class="ticket-head">
+          <span class="sev sev-2">SEV 2</span>
+          <span class="ticket-id">INC-JENKINS-PIPE</span>
+          <span class="ticket-status">✓ RESOLVED</span>
+        <span class="chev">▸ expand</span></summary>
+        <div class="ticket-body">
+          <h3>Jenkins pipeline failure on automated deployment</h3>
+          <dl>
+            <dt>Impact</dt>
+            <dd>An automated deployment pipeline stopped completing successfully, blocking scheduled deployments and service restarts.</dd>
+            <dt>Action</dt>
+            <dd>Troubleshot the Jenkins build logs to isolate where the pipeline was failing, fixed the underlying issue on the server, and confirmed the pipeline ran cleanly end-to-end again.</dd>
+            <dt>Takeaway</dt>
+            <dd>A broken pipeline is still a production incident — it just fails silently until someone needs a deployment to go out.</dd>
+          </dl>
+        </div>
+      </details>
+    </div>
+
+    <p class="incident-group">Linux</p>
+    <div class="incidents">
+      <details class="ticket">
+        <summary class="ticket-head">
+          <span class="sev sev-2">SEV 2</span>
+          <span class="ticket-id">INC-CPU-HIGH</span>
+          <span class="ticket-status">✓ RESOLVED</span>
+        <span class="chev">▸ expand</span></summary>
+        <div class="ticket-body">
+          <h3>Sustained high CPU degrading application response</h3>
+          <dl>
+            <dt>Impact</dt>
+            <dd>A production Linux host ran sustained high CPU utilization, slowing response times for the applications hosted on it.</dd>
+            <dt>Action</dt>
+            <dd>Used top/ps and process-level analysis to identify the runaway process, worked with the app team to address the underlying cause, and confirmed CPU and response times returned to normal.</dd>
+            <dt>Takeaway</dt>
+            <dd>Resource exhaustion incidents usually have a single runaway process behind them — finding it fast is the whole job.</dd>
+          </dl>
+        </div>
+      </details>
+
+      <details class="ticket">
+        <summary class="ticket-head">
+          <span class="sev sev-2">SEV 2</span>
+          <span class="ticket-id">INC-DISK-FULL</span>
+          <span class="ticket-status">✓ RESOLVED</span>
+        <span class="chev">▸ expand</span></summary>
+        <div class="ticket-body">
+          <h3>Filesystem full, halting application logging</h3>
+          <dl>
+            <dt>Impact</dt>
+            <dd>A filesystem filled to capacity, stopping application logs from writing and risking a broader service impact.</dd>
+            <dt>Action</dt>
+            <dd>Cleared archived logs to free space, restarted the affected services, and set a proactive disk-usage alert threshold to catch it earlier next time.</dd>
+            <dt>Takeaway</dt>
+            <dd>The fix is five minutes; the monitoring threshold is what stops it from becoming a recurring page.</dd>
+          </dl>
+        </div>
+      </details>
+    </div>
+
+    <p class="incident-group">Security</p>
+    <div class="incidents">
       <details class="ticket">
         <summary class="ticket-head">
           <span class="sev sev-1">SEV 1</span>
@@ -637,6 +722,126 @@
             <dd>Identified the expired cert in the chain, coordinated renewal and keystore updates, and restored connectivity. Followed up with tracking so expiries were caught before they became incidents.</dd>
             <dt>Takeaway</dt>
             <dd>The best P1 is the one your monitoring catches thirty days early.</dd>
+          </dl>
+        </div>
+      </details>
+    </div>
+
+    <p class="incident-group">Release Management</p>
+    <div class="incidents">
+      <details class="ticket">
+        <summary class="ticket-head">
+          <span class="sev sev-1">SEV 1</span>
+          <span class="ticket-id">INC-DEPLOY-RB</span>
+          <span class="ticket-status">✓ RESOLVED</span>
+        <span class="chev">▸ expand</span></summary>
+        <div class="ticket-body">
+          <h3>Failed production deployment requiring rollback</h3>
+          <dl>
+            <dt>Impact</dt>
+            <dd>A production deployment introduced application errors affecting service availability shortly after go-live.</dd>
+            <dt>Action</dt>
+            <dd>Executed the pre-planned rollback, validated services were restored to the last known good state, coordinated with the development team on the root cause, and opened an RCA for follow-up.</dd>
+            <dt>Takeaway</dt>
+            <dd>A deployment without a tested rollback plan isn't really a deployment plan — it's a gamble with an extra step.</dd>
+          </dl>
+        </div>
+      </details>
+
+      <details class="ticket">
+        <summary class="ticket-head">
+          <span class="sev sev-2">EMERGENCY</span>
+          <span class="ticket-id">CHG-EMERG</span>
+          <span class="ticket-status">✓ COMPLETED</span>
+        <span class="chev">▸ expand</span></summary>
+        <div class="ticket-body">
+          <h3>Weekend emergency change under CAB approval</h3>
+          <dl>
+            <dt>Context</dt>
+            <dd>A production issue required a fix outside the standard change window, going through expedited CAB (Change Advisory Board) approval for an emergency deployment.</dd>
+            <dt>Action</dt>
+            <dd>Prepared the change and rollback plan on short notice, got emergency approval, executed the deployment, and validated the fix before closing out the change.</dd>
+            <dt>Takeaway</dt>
+            <dd>Emergency changes still need a rollback plan — "urgent" is not a substitute for "tested."</dd>
+          </dl>
+        </div>
+      </details>
+    </div>
+
+    <p class="incident-group">Operations</p>
+    <div class="incidents">
+      <details class="ticket">
+        <summary class="ticket-head">
+          <span class="sev sev-2">SEV 2</span>
+          <span class="ticket-id">INC-DB-CONN</span>
+          <span class="ticket-status">✓ RESOLVED</span>
+        <span class="chev">▸ expand</span></summary>
+        <div class="ticket-body">
+          <h3>Database connectivity failure from exhausted connection pool</h3>
+          <dl>
+            <dt>Impact</dt>
+            <dd>Applications began failing to reach the database after the connection pool was exhausted.</dd>
+            <dt>Action</dt>
+            <dd>Investigated the listener and connection pool state, restarted the affected services, and validated that transactions resumed processing normally.</dd>
+            <dt>Takeaway</dt>
+            <dd>Connection pool exhaustion is a symptom — the real question is what stopped releasing connections upstream.</dd>
+          </dl>
+        </div>
+      </details>
+
+      <details class="ticket">
+        <summary class="ticket-head">
+          <span class="sev sev-2">MONITORING</span>
+          <span class="ticket-id">INC-APM-ALERT</span>
+          <span class="ticket-status">✓ RESOLVED</span>
+        <span class="chev">▸ expand</span></summary>
+        <div class="ticket-body">
+          <h3>AppDynamics/Datadog alert investigation</h3>
+          <dl>
+            <dt>Impact</dt>
+            <dd>A latency spike alert fired in AppDynamics/Datadog, requiring investigation before it escalated into a customer-facing issue.</dd>
+            <dt>Action</dt>
+            <dd>Traced the alert through APM transaction traces to isolate the slow component, ruled out a false positive, and worked with the app team on the underlying fix.</dd>
+            <dt>Takeaway</dt>
+            <dd>Good monitoring produces alerts you have to investigate, not just ones you have to silence.</dd>
+          </dl>
+        </div>
+      </details>
+
+      <details class="ticket">
+        <summary class="ticket-head">
+          <span class="sev sev-2">SEV 2</span>
+          <span class="ticket-id">INC-PERF-DEGR</span>
+          <span class="ticket-status">✓ RESOLVED</span>
+        <span class="chev">▸ expand</span></summary>
+        <div class="ticket-body">
+          <h3>Application performance degradation under load</h3>
+          <dl>
+            <dt>Impact</dt>
+            <dd>Application response times degraded noticeably under production load, short of a full outage but affecting user experience.</dd>
+            <dt>Action</dt>
+            <dd>Identified a thread pool bottleneck through monitoring and thread dump analysis, adjusted JVM/thread pool configuration, and validated response times returned to normal.</dd>
+            <dt>Takeaway</dt>
+            <dd>Not every incident is down/up — slow is still an incident, and it's often the harder one to diagnose.</dd>
+          </dl>
+        </div>
+      </details>
+
+      <details class="ticket">
+        <summary class="ticket-head">
+          <span class="sev sev-2">DR EXERCISE</span>
+          <span class="ticket-id">DR-FAILOVER</span>
+          <span class="ticket-status">✓ COMPLETED</span>
+        <span class="chev">▸ expand</span></summary>
+        <div class="ticket-body">
+          <h3>Disaster recovery check call and failover validation</h3>
+          <dl>
+            <dt>Context</dt>
+            <dd>Participated in scheduled DR check calls and failover testing to validate recovery readiness for banking application environments.</dd>
+            <dt>Action</dt>
+            <dd>Monitored application failover and database synchronization during the exercise, supported business validation of recovered services, and confirmed recovery met expected timelines.</dd>
+            <dt>Takeaway</dt>
+            <dd>DR only works if it's rehearsed — the exercise is where you find the gaps the runbook didn't mention.</dd>
           </dl>
         </div>
       </details>
@@ -737,6 +942,9 @@
           <li>Acted as SME to senior stakeholders on IBM WebSphere, IBM MQ and production support processes, operating with independence of judgement.</li>
           <li>Performed post-release checkouts after application releases and infrastructure updates; participated in disaster recovery testing and release activities through to production.</li>
           <li>Monitored application health with AppDynamics and Datadog; administered Linux/RHEL servers and wrote Bash scripts for log analysis and operational automation.</li>
+          <li>Applied WebSphere Application Server patching and fix pack updates, and created/deleted IBM MQ objects (queue managers, queues, channels) as part of routine middleware administration.</li>
+          <li>Handled application deployments and decommissioning, database password resets, and joined Code Red / severity bridge calls to troubleshoot live issues directly with clients and stakeholders through to resolution.</li>
+          <li>Participated in DR check calls and monitoring to validate failover readiness across banking application environments.</li>
           <li>Executed production changes end-to-end under formal change management with zero errors or outages, including complex multi-change windows handled solo.</li>
           <li>Rated a top performer for all three years and received multiple client appreciations for incident handling and support quality.</li>
         </ul>
