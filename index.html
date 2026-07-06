@@ -858,53 +858,45 @@
 
 <section id="projects">
   <div class="wrap reveal">
-    <p class="eyebrow">Projects &amp; Lab Work</p>
+    <p class="eyebrow">Projects</p>
     <h2>Things I've built</h2>
-    <p class="lede">Featured projects plus self-directed Azure hands-on labs.</p>
+    <p class="lede">Three data &amp; AI projects from my postgraduate work, and three cloud/infrastructure projects from my Azure track.</p>
+
+    <p class="incident-group">Data &amp; AI</p>
     <div class="projects">
       <article class="project">
-        <span class="feat">Featured</span>
+        <h3>RISE Smart Scoring &amp; Feedback</h3>
+        <p>Built the NLP scoring pipeline and Streamlit app for an applicant evaluation tool, semantically scoring project abstracts against a four-criterion rubric and generating per-applicant feedback.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">NLP</span><span class="tag">Streamlit</span><span class="tag">scikit-learn</span></div>
+      </article>
+      <article class="project">
+        <h3>Winter Road Risk Forecast</h3>
+        <p>Built a decision support pipeline pulling live weather forecasts to score road conditions into risk bands and generate maintenance recommendations, with automated PDF reporting.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Weather API</span><span class="tag">Data Modeling</span><span class="tag">Docker</span></div>
+      </article>
+      <article class="project">
+        <h3>Crop Yield BI Dashboard</h3>
+        <p>Built a SQL-based data cleaning pipeline and Power BI dashboard analyzing crop yield against soil type, soil pH, and environmental conditions across 35,000+ records.</p>
+        <div class="tags"><span class="tag">SQL</span><span class="tag">Power BI</span><span class="tag">Data Engineering</span></div>
+      </article>
+    </div>
+
+    <p class="incident-group">Cloud &amp; DevOps</p>
+    <div class="projects">
+      <article class="project">
+        <h3>Azure Infrastructure as Code</h3>
+        <p>Provisioned a networked Azure environment with Terraform — VNet, NSG, storage, an App Service web app secured with managed identity, and Azure SQL — following least-privilege and infrastructure-as-code practices.</p>
+        <div class="tags"><span class="tag">Terraform</span><span class="tag">Azure</span><span class="tag">IaC</span></div>
+      </article>
+      <article class="project">
+        <h3>CI/CD Pipeline for Containerized Deployment</h3>
+        <p>Building an end-to-end pipeline — build, test, container image scan, push to registry, deploy to Kubernetes — using Docker, a container registry, and vulnerability scanning as part of hands-on AKS deployment practice.</p>
+        <div class="tags"><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">CI/CD</span><span class="tag">AKS</span></div>
+      </article>
+      <article class="project">
         <h3>Infrastructure Monitoring &amp; Alerting Pipeline</h3>
-        <p>Jenkins pipeline integrated with Prometheus and Grafana for end-to-end application monitoring and alerting, with Azure Monitor configured for cloud resource health tracking and automated alert notification workflows.</p>
-        <div class="tags"><span class="tag">Jenkins</span><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">Azure Monitor</span></div>
-        <a class="repo" href="https://github.com/PaulJayaprakash21/monitoring-alerting-pipeline">→ view repo</a>
-      </article>
-      <article class="project">
-        <span class="feat">Featured</span>
-        <h3>Crop Yield Prediction Dashboard</h3>
-        <p>Python machine learning model with interactive Power BI dashboards for business stakeholders, deployed as an Azure Web App.</p>
-        <div class="tags"><span class="tag">Python</span><span class="tag">ML</span><span class="tag">Power BI</span><span class="tag">Azure Web App</span></div>
-        <a class="repo" href="https://github.com/PaulJayaprakash21/crop-yield-prediction">→ view repo</a>
-      </article>
-      <article class="project">
-        <h3>Containerized FastAPI on ACR</h3>
-        <p>FastAPI app containerized with Docker and pushed through a private Azure Container Registry as the base for AKS deployment work.</p>
-        <div class="tags"><span class="tag">Docker</span><span class="tag">ACR</span><span class="tag">FastAPI</span></div>
-        <a class="repo" href="https://github.com/PaulJayaprakash21/azure-acr-fastapi">→ view repo</a>
-      </article>
-      <article class="project">
-        <h3>AKS Cluster Architecture</h3>
-        <p>Deployed and explored Azure Kubernetes Service — cluster setup, workloads, and how AKS pieces fit together from an operations point of view.</p>
-        <div class="tags"><span class="tag">AKS</span><span class="tag">Kubernetes</span><span class="tag">Azure CLI</span></div>
-        <a class="repo" href="https://github.com/PaulJayaprakash21/azure-aks-lab">→ view repo</a>
-      </article>
-      <article class="project">
-        <h3>Multi-Region Traffic Manager</h3>
-        <p>Azure Traffic Manager routing across Australia East and Canada East regions to test failover and geographic routing behaviour.</p>
-        <div class="tags"><span class="tag">Traffic Manager</span><span class="tag">Multi-region</span></div>
-        <a class="repo" href="https://github.com/PaulJayaprakash21/azure-traffic-manager-lab">→ view repo</a>
-      </article>
-      <article class="project">
-        <h3>Service Bus Messaging</h3>
-        <p>Azure Service Bus queues and topics — a natural bridge from years of IBM MQ, comparing the two messaging models hands-on.</p>
-        <div class="tags"><span class="tag">Service Bus</span><span class="tag">Messaging</span><span class="tag">IBM MQ</span></div>
-        <a class="repo" href="https://github.com/PaulJayaprakash21/azure-service-bus-lab">→ view repo</a>
-      </article>
-      <article class="project">
-        <h3>Infrastructure as Code</h3>
-        <p>Azure resources provisioned with Terraform and ARM templates, managed through an Azure DevOps organization with Git-based workflows.</p>
-        <div class="tags"><span class="tag">Terraform</span><span class="tag">ARM</span><span class="tag">Azure DevOps</span></div>
-        <a class="repo" href="https://github.com/PaulJayaprakash21/azure-iac-lab">→ view repo</a>
+        <p>Building a monitoring and alerting pipeline integrating Prometheus and Grafana for application observability, with Azure Monitor for cloud resource health tracking and automated alert workflows.</p>
+        <div class="tags"><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">Azure Monitor</span><span class="tag">Jenkins</span></div>
       </article>
     </div>
   </div>
