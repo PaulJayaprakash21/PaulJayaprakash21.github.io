@@ -41,6 +41,7 @@
       radial-gradient(700px 400px at 10% 10%, rgba(34,211,238,.07), transparent 55%),
       linear-gradient(rgba(49,80,122,.08) 1px, transparent 1px),
       linear-gradient(90deg, rgba(49,80,122,.08) 1px, transparent 1px);
+    background-repeat:no-repeat,no-repeat,repeat,repeat;
     background-size:auto,auto,44px 44px,44px 44px;
   }
   ::selection{background:rgba(59,130,246,.35)}
@@ -132,7 +133,28 @@
   .stat .lbl{font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.45}
 
   /* ---------- sections ---------- */
-  section{padding:72px 0}
+  section{padding:72px 0;position:relative;overflow:hidden}
+  section .wrap{position:relative;z-index:1}
+  section::before{
+    content:"";position:absolute;width:640px;height:640px;border-radius:50%;
+    opacity:.13;pointer-events:none;z-index:0
+  }
+  section:nth-of-type(4n+1)::before{
+    top:-220px;right:-180px;
+    background:radial-gradient(circle,var(--blue),transparent 70%)
+  }
+  section:nth-of-type(4n+2)::before{
+    bottom:-220px;left:-180px;
+    background:radial-gradient(circle,var(--cyan),transparent 70%)
+  }
+  section:nth-of-type(4n+3)::before{
+    top:-200px;left:-220px;
+    background:radial-gradient(circle,var(--ok),transparent 70%)
+  }
+  section:nth-of-type(4n+4)::before{
+    bottom:-200px;right:-220px;
+    background:radial-gradient(circle,var(--blue),transparent 70%)
+  }
   .eyebrow{
     font-family:var(--mono);font-size:12px;font-weight:600;
     letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);
@@ -153,6 +175,11 @@
   }
   @media (max-width:640px){ .tower-antenna{display:none} }
   .hero{overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(60% 45% at 50% 42%, rgba(10,17,32,.55), transparent 75%);
+    pointer-events:none;z-index:0
+  }
   .hero::after{
     content:"";position:absolute;left:0;right:0;bottom:0;height:40%;
     background:linear-gradient(180deg,transparent,var(--bg) 92%);
@@ -400,9 +427,9 @@
 <header class="hero">
   <svg class="skyline" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <defs>
-      <radialGradient id="towerGlow" cx="50%" cy="35%" r="60%">
-        <stop offset="0%" stop-color="#34D399" stop-opacity=".32"/>
-        <stop offset="55%" stop-color="#3B82F6" stop-opacity=".14"/>
+      <radialGradient id="towerGlow" cx="50%" cy="35%" r="55%">
+        <stop offset="0%" stop-color="#34D399" stop-opacity=".24"/>
+        <stop offset="55%" stop-color="#3B82F6" stop-opacity=".1"/>
         <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
       </radialGradient>
       <linearGradient id="buildingFill" x1="0" y1="0" x2="0" y2="1">
@@ -413,10 +440,19 @@
         <stop offset="0%" stop-color="#2A6458"/>
         <stop offset="100%" stop-color="#11332E"/>
       </linearGradient>
+      <linearGradient id="skyBlueGreen" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"  stop-color="#0A1120"/>
+        <stop offset="35%" stop-color="#12253D"/>
+        <stop offset="65%" stop-color="#1E3F4A"/>
+        <stop offset="100%" stop-color="#2C5049"/>
+      </linearGradient>
     </defs>
 
+    <!-- sky -->
+    <rect x="0" y="0" width="1600" height="700" fill="url(#skyBlueGreen)"/>
+
     <!-- glow behind tower -->
-    <rect x="500" y="0" width="600" height="700" fill="url(#towerGlow)"/>
+    <rect x="70" y="0" width="600" height="700" fill="url(#towerGlow)"/>
 
     <!-- stars -->
     <g fill="#93A6C0" opacity=".5">
@@ -426,13 +462,23 @@
       <circle cx="1480" cy="120" r="1.7"/><circle cx="60" cy="220" r="1.2"/>
     </g>
 
-    <!-- clouds -->
-    <g fill="#7C8DA0" opacity=".2">
-      <ellipse class="cloud c1" cx="220" cy="130" rx="100" ry="24"/>
-      <ellipse class="cloud c1" cx="310" cy="115" rx="65" ry="18"/>
-      <ellipse class="cloud c2" cx="1080" cy="100" rx="120" ry="26"/>
-      <ellipse class="cloud c2" cx="1190" cy="120" rx="70" ry="17"/>
-      <ellipse class="cloud c3" cx="1420" cy="160" rx="85" ry="20"/>
+    <!-- dramatic layered clouds -->
+    <g fill="#3B5568" opacity=".35">
+      <ellipse cx="200" cy="160" rx="180" ry="50"/>
+      <ellipse cx="80"  cy="190" rx="130" ry="38"/>
+      <ellipse cx="1350" cy="140" rx="200" ry="55"/>
+      <ellipse cx="1180" cy="180" rx="140" ry="40"/>
+    </g>
+    <g fill="#4E7079" opacity=".3">
+      <ellipse class="cloud c1" cx="220" cy="130" rx="120" ry="30"/>
+      <ellipse class="cloud c1" cx="340" cy="110" rx="80"  ry="22"/>
+      <ellipse class="cloud c2" cx="1080" cy="100" rx="150" ry="34"/>
+      <ellipse class="cloud c2" cx="1220" cy="125" rx="90"  ry="22"/>
+    </g>
+    <g fill="#7FA8A0" opacity=".22">
+      <ellipse class="cloud c3" cx="700" cy="90"  rx="170" ry="26"/>
+      <ellipse class="cloud c3" cx="950" cy="150" rx="110" ry="24"/>
+      <ellipse class="cloud c1" cx="1420" cy="170" rx="100" ry="22"/>
     </g>
 
     <!-- far skyline (smaller, darker) -->
@@ -487,16 +533,28 @@
       <rect class="window w4" x="1415" y="490" width="5" height="7"/>
     </g>
 
-    <!-- CN Tower -->
+    <!-- CN Tower — refined silhouette: tapered shaft, main pod, SkyPod, antenna -->
     <g fill="url(#towerFill)" class="tower-antenna">
-      <rect x="735" y="90" width="8" height="95"/>
+      <rect x="366" y="70" width="6" height="110"/>
+      <circle cx="369" cy="70" r="3" fill="#F87171" opacity=".95"/>
     </g>
-    <circle cx="739" cy="90" r="4" fill="#F87171" opacity=".9" class="tower-antenna"/>
     <g fill="url(#towerFill)">
-      <rect x="730" y="180" width="18" height="520"/>
-      <path d="M 690 300 L 788 300 L 762 340 L 716 340 Z"/>
-      <path d="M 705 340 L 773 340 L 758 370 L 720 370 Z"/>
-      <ellipse cx="739" cy="220" rx="26" ry="14"/>
+      <!-- tapered main shaft: wider at base, narrowing toward the pod -->
+      <path d="M 352 700 L 386 700 L 380 250 L 358 250 Z"/>
+      <!-- main observation pod -->
+      <ellipse cx="369" cy="230" rx="34" ry="20"/>
+      <rect x="345" y="225" width="48" height="18" rx="3"/>
+      <!-- lower SkyPod -->
+      <ellipse cx="369" cy="290" rx="20" ry="11"/>
+    </g>
+    <!-- glass window band around the main pod -->
+    <rect x="339" y="223" width="60" height="7" rx="2" fill="#22D3EE" opacity=".4"/>
+    <!-- pod highlight rim for depth -->
+    <ellipse cx="369" cy="222" rx="34" ry="6" fill="#3B82F6" opacity=".35"/>
+    <!-- support struts beneath the pod -->
+    <g stroke="url(#towerFill)" stroke-width="2" opacity=".8">
+      <line x1="350" y1="248" x2="360" y2="270"/>
+      <line x1="388" y1="248" x2="378" y2="270"/>
     </g>
   </svg>
   <div class="wrap">
@@ -526,14 +584,17 @@
     <p class="eyebrow">Profile</p>
     <h2>Keeping enterprise systems online — and moving them to the cloud.</h2>
     <p class="lede">
-      I spent ~3 years at <strong>Cognizant</strong> providing technical and business support for enterprise banking
-      applications — running <strong>IBM WebSphere</strong> and <strong>IBM MQ</strong> environments, working P1
-      incidents under SLA, performing post-release checkouts and disaster recovery testing, and acting as SME to
-      senior stakeholders. Since relocating to Canada, I completed a postgraduate program at Georgian College
-      (Big Data Analytics &amp; AI, with Honors) and shifted my hands-on work to <strong>Microsoft Azure</strong>:
-      AKS, container registries, Service Bus, Traffic Manager, Terraform, and Azure DevOps pipelines — alongside
-      <strong>AWS</strong> certifications through AWS Academy and data &amp; analytics work with SQL, Power BI and
-      Tableau. AZ-900 certified (921/1000) and ITIL v3 Foundation certified.
+      I spent over 3 years at <strong>Cognizant</strong> supporting enterprise banking applications in
+      high-availability production environments. My work focused on <strong>IBM WebSphere</strong>,
+      <strong>IBM MQ</strong>, incident management, release validation, disaster recovery testing, middleware
+      administration, and resolving P1/P2 production issues while meeting strict SLA commitments.
+    </p>
+    <p class="lede" style="margin-top:16px">
+      After relocating to Canada, I completed a Postgraduate Certificate in Big Data Analytics &amp; AI with Honors
+      at Georgian College and expanded my expertise into <strong>Microsoft Azure</strong>, building hands-on
+      experience with AKS, Azure Container Registry, Service Bus, Traffic Manager, Terraform, Azure DevOps, and
+      cloud-native deployments. I also work with SQL, Power BI, Tableau, Docker, Kubernetes, and Python, and hold
+      Microsoft Azure Fundamentals (AZ-900) and ITIL v3 Foundation certifications.
     </p>
   </div>
 </section>
@@ -1011,6 +1072,7 @@
     <div class="tags" style="margin-top:16px">
       <span class="tag">Production Support</span><span class="tag">Middleware Engineering</span>
       <span class="tag">Cloud Operations</span><span class="tag">Platform Engineering</span>
+      <span class="tag">Application Support</span>
       <span class="tag">SRE</span><span class="tag">Toronto · Hybrid · Remote</span>
     </div>
     <div class="hero-cta" style="margin-top:26px">
