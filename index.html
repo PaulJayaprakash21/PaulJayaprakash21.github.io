@@ -3,1148 +3,425 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paul Udayan Gomez Jayaprakash — Production Support &amp; Cloud Operations Engineer</title>
-<meta name="description" content="Paul Udayan Gomez Jayaprakash — production support, cloud operations, and application support engineer with a middleware background (IBM WebSphere, IBM MQ), building on Microsoft Azure. Toronto, Ontario, Canada.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#0A1120;
-    --bg-glow:#0E1B33;
-    --panel:#101B2E;
-    --panel-2:#15233A;
-    --line:#22344F;
-    --line-bright:#31507A;
-    --text:#E8EFF8;
-    --muted:#93A6C0;
-    --faint:#5F7392;
-    --blue:#3B82F6;
-    --cyan:#22D3EE;
-    --ok:#34D399;
-    --sev1:#F87171;
-    --warn:#FBBF24;
-    --maxw:1240px;
-    --sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
-    --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,monospace;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth;scroll-padding-top:80px}
-  body{
-    font-family:var(--sans);
-    background:var(--bg);
-    color:var(--text);
-    line-height:1.65;
-    font-size:16px;
-    background-image:
-      radial-gradient(900px 500px at 70% -10%, rgba(59,130,246,.16), transparent 60%),
-      radial-gradient(700px 400px at 10% 10%, rgba(34,211,238,.07), transparent 55%),
-      linear-gradient(rgba(49,80,122,.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(49,80,122,.08) 1px, transparent 1px);
-    background-repeat:no-repeat,no-repeat,repeat,repeat;
-    background-size:auto,auto,44px 44px,44px 44px;
-  }
-  ::selection{background:rgba(59,130,246,.35)}
-  a{color:var(--cyan);text-decoration:none;transition:color .15s}
-  a:hover{color:#7DE7FA}
-  a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-
-  /* ---------- nav ---------- */
-  .nav{
-    position:sticky;top:0;z-index:50;
-    background:rgba(10,17,32,.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px}
-  .nav-logo{font-family:var(--mono);font-weight:600;font-size:15px;color:var(--text)}
-  .nav-logo .p{color:var(--cyan)}
-  .nav-links{display:flex;gap:24px;font-size:14px;font-weight:500}
-  .nav-links a{color:var(--muted)}
-  .nav-links a:hover{color:var(--text)}
-  .hamburger{display:none;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;padding:6px}
-  @media (max-width:760px){
-    .nav-links{
-      display:none;position:absolute;top:60px;left:0;right:0;
-      flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line)
-    }
-    .nav-links.open{display:flex}
-    .nav-links a{padding:14px 24px;border-top:1px solid var(--line)}
-    .hamburger{display:block}
-  }
-
-  /* ---------- hero ---------- */
-  .hero{
-    min-height:calc(100vh - 60px);display:flex;align-items:center;
-    padding:64px 0;position:relative;text-align:center
-  }
-  .hero .wrap{width:100%}
-  @media (max-width:760px){
-    .hero{min-height:auto;padding:56px 0 64px}
-  }
-  .statusline{
-    display:inline-flex;align-items:center;gap:9px;
-    font-family:var(--mono);font-size:12.5px;color:var(--muted);
-    border:1px solid var(--line);border-radius:100px;
-    padding:7px 16px;margin-bottom:32px;background:rgba(16,27,46,.6)
-  }
-  .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);position:relative;flex:none}
-  .dot::after{
-    content:"";position:absolute;inset:-4px;border-radius:50%;
-    border:1px solid var(--ok);opacity:.6;animation:pulse 2s ease-out infinite
-  }
-  @keyframes pulse{0%{transform:scale(.6);opacity:.7}100%{transform:scale(1.5);opacity:0}}
-  h1{
-    font-size:clamp(24px,4vw,44px);font-weight:700;letter-spacing:-0.02em;line-height:1.15;
-    margin:0 auto 18px;white-space:nowrap
-  }
-  @media (max-width:680px){h1{white-space:normal;font-size:clamp(24px,7vw,36px)}}
-  .hero .role{font-size:clamp(18px,2.6vw,23px);color:var(--muted);font-weight:500;max-width:44ch;margin:0 auto}
-  .hero .role strong{color:var(--text);font-weight:600}
-  .hero .role .arrow{color:var(--cyan)}
-  .hero-cta{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
-  .btn{
-    display:inline-flex;align-items:center;gap:8px;
-    font-weight:600;font-size:15px;padding:12px 22px;border-radius:8px;
-    border:1px solid transparent;transition:transform .15s, box-shadow .15s, border-color .15s
-  }
-  .btn:hover{transform:translateY(-2px)}
-  .btn-primary{
-    background:linear-gradient(92deg,var(--blue),#2563EB);color:#fff;
-    box-shadow:0 8px 24px rgba(59,130,246,.35)
-  }
-  .btn-primary:hover{color:#fff;box-shadow:0 12px 30px rgba(59,130,246,.45)}
-  .btn-ghost{border-color:var(--line-bright);color:var(--text);background:rgba(16,27,46,.5)}
-  .btn-ghost:hover{color:var(--text);border-color:var(--cyan)}
-
-  /* ---------- stat tiles ---------- */
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;padding:20px 0 72px}
-  .stat{
-    background:linear-gradient(180deg,var(--panel-2),var(--panel));
-    border:1px solid var(--line);border-radius:12px;padding:22px 24px;
-    transition:border-color .2s, transform .2s
-  }
-  .stat:hover{border-color:var(--line-bright);transform:translateY(-3px)}
-  .stat .num{
-    font-family:var(--mono);font-size:30px;font-weight:600;letter-spacing:-0.02em;
-    background:linear-gradient(92deg,var(--blue),var(--cyan));
-    -webkit-background-clip:text;background-clip:text;color:transparent
-  }
-  .stat .lbl{font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.45}
-
-  /* ---------- sections ---------- */
-  section{padding:72px 0;position:relative;overflow:hidden}
-  section .wrap{position:relative;z-index:1}
-  section::before{
-    content:"";position:absolute;width:640px;height:640px;border-radius:50%;
-    opacity:.13;pointer-events:none;z-index:0
-  }
-  section:nth-of-type(4n+1)::before{
-    top:-220px;right:-180px;
-    background:radial-gradient(circle,var(--blue),transparent 70%)
-  }
-  section:nth-of-type(4n+2)::before{
-    bottom:-220px;left:-180px;
-    background:radial-gradient(circle,var(--cyan),transparent 70%)
-  }
-  section:nth-of-type(4n+3)::before{
-    top:-200px;left:-220px;
-    background:radial-gradient(circle,var(--ok),transparent 70%)
-  }
-  section:nth-of-type(4n+4)::before{
-    bottom:-200px;right:-220px;
-    background:radial-gradient(circle,var(--blue),transparent 70%)
-  }
-  .eyebrow{
-    font-family:var(--mono);font-size:12px;font-weight:600;
-    letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);
-    margin-bottom:14px;display:flex;align-items:center;gap:12px
-  }
-  .eyebrow::after{content:"";height:1px;width:56px;background:linear-gradient(90deg,var(--cyan),transparent)}
-  h2{font-size:clamp(26px,4vw,34px);font-weight:700;letter-spacing:-0.02em;margin-bottom:18px}
-  .lede{color:var(--muted);font-size:18px;line-height:1.75}
-  .lede strong{color:var(--text);font-weight:600}
-  .lede,.ticket-body dd,.skill p,.project p,.job li{
-    text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto
-  }
-
-  /* ---------- skyline background ---------- */
-  .skyline{
-    position:absolute;left:0;right:0;bottom:0;width:100%;
-    height:100%;pointer-events:none;z-index:0
-  }
-  @media (max-width:640px){ .tower-antenna{display:none} }
-  .hero{overflow:hidden}
-  .hero::before{
-    content:"";position:absolute;inset:0;
-    background:radial-gradient(60% 45% at 50% 42%, rgba(10,17,32,.55), transparent 75%);
-    pointer-events:none;z-index:0
-  }
-  .hero::after{
-    content:"";position:absolute;left:0;right:0;bottom:0;height:40%;
-    background:linear-gradient(180deg,transparent,var(--bg) 92%);
-    pointer-events:none;z-index:0
-  }
-  .hero .wrap{position:relative;z-index:1}
-  .window{animation:flicker 5s ease-in-out infinite}
-  .window.w2{animation-delay:-1.4s}
-  .window.w3{animation-delay:-2.8s}
-  .window.w4{animation-delay:-4s}
-  @keyframes flicker{0%,100%{opacity:.85}50%{opacity:.25}}
-  .cloud{opacity:.4;animation:drift 60s linear infinite}
-  .cloud.c2{animation-duration:80s;animation-delay:-20s}
-  .cloud.c3{animation-duration:100s;animation-delay:-50s}
-  @keyframes drift{
-    0%{transform:translateX(-60px)}
-    50%{transform:translateX(60px)}
-    100%{transform:translateX(-60px)}
-  }
-  @media (prefers-reduced-motion:reduce){.cloud,.window{animation:none}}
-
-  .incident-card{padding:0;overflow:hidden}
-  .incident-toggle{
-    all:unset;box-sizing:border-box;display:block;width:100%;padding:24px;cursor:pointer;position:relative
-  }
-  .incident-toggle .teaser{font-size:14.5px;color:var(--muted);margin-top:4px}
-  .incident-chev{
-    position:absolute;top:24px;right:22px;color:var(--faint);
-    font-size:14px;transition:transform .25s ease
-  }
-  .incident-toggle[aria-expanded="true"] .incident-chev{transform:rotate(180deg);color:var(--cyan)}
-  .incident-details{max-height:0;overflow:hidden;transition:max-height .3s ease}
-  .incident-details-inner{padding:0 24px 24px}
-  .incident-details-inner p{font-size:14.5px;color:var(--muted);margin-bottom:14px}
-
-  /* ---------- floating dock ---------- */
-  .dock{
-    position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:60;
-    display:flex;gap:4px;padding:8px;border-radius:100px;
-    background:rgba(16,27,46,.75);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-    border:1px solid var(--line);box-shadow:0 14px 40px rgba(0,0,0,.4)
-  }
-  .dock a{
-    padding:8px 16px;border-radius:100px;font-size:13px;font-family:var(--mono);
-    color:var(--muted);white-space:nowrap;transition:background .2s,color .2s
-  }
-  .dock a:hover,.dock a.active{background:rgba(59,130,246,.16);color:var(--cyan)}
-  @media (max-width:900px){.dock{display:none}}
-
-  /* ---------- tool logo grid ---------- */
-  .toolgrid{
-    display:grid;grid-template-columns:repeat(10,1fr);gap:14px;
-    margin-top:36px;margin-bottom:14px
-  }
-  @media (max-width:1000px){.toolgrid{grid-template-columns:repeat(5,1fr)}}
-  @media (max-width:620px){.toolgrid{grid-template-columns:repeat(4,1fr)}}
-  .tool{
-    background:var(--panel);border:1px solid var(--line);border-radius:12px;
-    padding:18px 10px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;
-    transition:border-color .2s, transform .2s, box-shadow .2s
-  }
-  .tool:hover{border-color:var(--line-bright);transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.35)}
-  .tool img{width:48px;height:48px;object-fit:contain}
-  .tool span{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:center;line-height:1.3}
-
-  /* ---------- company logos ---------- */
-  .job-title{display:flex;align-items:center;gap:14px;min-width:0}
-  .co-logo{
-    display:inline-flex;align-items:center;justify-content:center;flex:none;
-    width:46px;height:46px
-  }
-  .co-logo img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px}
-
-  /* ---------- skills ---------- */
-  .skills{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:36px}
-  @media (max-width:1100px){.skills{grid-template-columns:repeat(2,1fr)}}
-  @media (max-width:640px){.skills{grid-template-columns:1fr}}
-  .skill{
-    background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px;
-    transition:border-color .2s, transform .2s, box-shadow .2s;position:relative;overflow:hidden
-  }
-  .skill::before{
-    content:"";position:absolute;top:0;left:0;right:0;height:2px;
-    background:linear-gradient(90deg,var(--blue),var(--cyan));
-    opacity:0;transition:opacity .2s
-  }
-  .skill:hover{border-color:var(--line-bright);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.35)}
-  .skill:hover::before{opacity:1}
-  .skill h3{font-size:15px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:10px}
-  .skill h3 .ico{
-    width:30px;height:30px;border-radius:8px;flex:none;
-    display:inline-flex;align-items:center;justify-content:center;
-    background:rgba(59,130,246,.14);color:var(--cyan);font-family:var(--mono);font-size:13px
-  }
-  .skill p{font-size:14.5px;color:var(--muted)}
-
-  /* ---------- incident log ---------- */
-  .incident-group{
-    font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.12em;
-    text-transform:uppercase;color:var(--faint);margin:36px 0 -6px
-  }
-  .incident-group:first-child{margin-top:8px}
-  .incidents{
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:18px;margin-top:36px;align-items:start
-  }
-  .ticket{
-    background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;
-    transition:border-color .2s, transform .2s, box-shadow .2s
-  }
-  .ticket:hover{border-color:var(--line-bright);transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.35)}
-  .ticket-head{
-    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
-    padding:13px 20px;border-bottom:1px solid var(--line);
-    font-family:var(--mono);font-size:12.5px;background:rgba(21,35,58,.6)
-  }
-  .sev{font-weight:600;padding:3px 10px;border-radius:5px;font-size:11.5px;letter-spacing:.05em}
-  .sev-1{background:rgba(248,113,113,.13);color:var(--sev1);border:1px solid rgba(248,113,113,.4)}
-  .sev-2{background:rgba(251,191,36,.12);color:var(--warn);border:1px solid rgba(251,191,36,.4)}
-  .ticket-id{color:var(--faint)}
-  .ticket-status{margin-left:auto;color:var(--ok);font-weight:500}
-  .ticket[open] .chev{transform:rotate(90deg)}
-  .chev{display:inline-block;transition:transform .2s;color:var(--faint);margin-left:auto;font-family:var(--mono);font-size:12px}
-  summary.ticket-head{cursor:pointer;list-style:none}
-  summary.ticket-head::-webkit-details-marker{display:none}
-  .ticket-body{padding:20px 22px 22px}
-  .ticket-body h3{font-size:17px;font-weight:600;margin-bottom:12px}
-  .ticket-body dl{display:grid;grid-template-columns:max-content 1fr;gap:7px 18px;font-size:14.5px}
-  .ticket-body dt{font-family:var(--mono);font-size:11.5px;color:var(--faint);text-transform:uppercase;letter-spacing:.1em;padding-top:3px}
-  .ticket-body dd{color:var(--muted);line-height:1.65}
-  @media (max-width:560px){.ticket-body dl{grid-template-columns:1fr}.ticket-body dt{padding-top:10px}}
-
-  /* ---------- projects ---------- */
-  .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:36px}
-  .project{
-    background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px;
-    display:flex;flex-direction:column;gap:12px;
-    transition:border-color .2s, transform .2s, box-shadow .2s
-  }
-  .project:hover{border-color:var(--line-bright);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.35)}
-  .project .feat{
-    align-self:flex-start;font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;
-    color:var(--cyan);border:1px solid rgba(34,211,238,.4);background:rgba(34,211,238,.08);
-    padding:3px 9px;border-radius:5px;text-transform:uppercase
-  }
-  .project h3{font-size:16.5px;font-weight:600}
-  .project p{font-size:14.5px;color:var(--muted);flex:1}
-  .tags{display:flex;flex-wrap:wrap;gap:7px}
-  .tag{
-    font-family:var(--mono);font-size:11.5px;color:var(--muted);
-    border:1px solid var(--line);border-radius:5px;padding:3px 9px;background:rgba(21,35,58,.5)
-  }
-  .project a.repo{font-family:var(--mono);font-size:13px;font-weight:500}
-
-  /* ---------- experience ---------- */
-  .timeline{margin-top:40px;position:relative;padding-left:28px}
-  .timeline::before{
-    content:"";position:absolute;left:5px;top:8px;bottom:8px;width:2px;
-    background:linear-gradient(180deg,var(--blue),var(--cyan),transparent)
-  }
-  .job{position:relative;padding-bottom:44px}
-  .job:last-child{padding-bottom:0}
-  .job::before{
-    content:"";position:absolute;left:-28px;top:7px;width:12px;height:12px;border-radius:50%;
-    background:var(--bg);border:2.5px solid var(--cyan)
-  }
-  .job-head{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:6px}
-  .job-head h3{font-size:18px;font-weight:600}
-  .job-head .org{color:var(--muted);font-weight:400}
-  .dates{font-family:var(--mono);font-size:13px;color:var(--faint);white-space:nowrap;padding-top:4px}
-  .job ul{list-style:none;display:grid;gap:9px;margin-top:10px}
-  .job li{padding-left:20px;position:relative;font-size:15px;color:var(--muted)}
-  .job li::before{content:"";position:absolute;left:0;top:11px;width:9px;height:2px;background:var(--cyan)}
-  .job .sub{font-size:14px;color:var(--faint);font-style:italic}
-
-  /* ---------- certs ---------- */
-  .certs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:36px}
-  .cert{
-    background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px;
-    transition:border-color .2s, transform .2s
-  }
-  .cert:hover{border-color:var(--line-bright);transform:translateY(-2px)}
-  .cert .name{font-weight:600;font-size:15px}
-  .cert .meta{font-family:var(--mono);font-size:12.5px;color:var(--faint);margin-top:7px}
-  .cert.hl{border-color:rgba(59,130,246,.5);background:linear-gradient(180deg,rgba(59,130,246,.1),var(--panel))}
-  .cert.pending{border-style:dashed}
-  .cert.pending .meta{color:var(--warn)}
-
-  /* ---------- footer ---------- */
-  footer{border-top:1px solid var(--line);padding:72px 0 88px;margin-top:24px}
-  footer h2{margin-bottom:12px}
-  footer .prompt{
-    font-family:var(--mono);font-size:14.5px;color:var(--muted);margin-top:26px;
-    background:var(--panel);border:1px solid var(--line);border-radius:10px;
-    padding:16px 20px;display:inline-block
-  }
-  footer .prompt::before{content:"$ ";color:var(--cyan)}
-  footer .fineprint{margin-top:34px;font-size:13px;color:var(--faint)}
-
-  /* ---------- reveal animation ---------- */
-  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
-  .reveal.in{opacity:1;transform:none}
-  @media (prefers-reduced-motion:reduce){
-    html{scroll-behavior:auto}
-    *,*::before,*::after{animation:none!important;transition:none!important}
-    .reveal{opacity:1;transform:none}
-  }
-</style>
-<meta property="og:title" content="Paul Udayan Gomez Jayaprakash — Production Support & Cloud Operations Engineer">
-<meta property="og:description" content="Production support and middleware engineer (IBM WebSphere, IBM MQ) building toward Azure cloud engineering. Toronto, Ontario, Canada.">
+<title>Paul Jayaprakash | Azure Administrator (AZ-104) &amp; Production Support Engineer | Toronto</title>
+<meta name="description" content="Paul Jayaprakash: AZ-104 certified Azure Administrator and production support engineer with nearly 3 years of L2 support for a major North American bank (IBM WebSphere, IBM MQ, Linux, AKS, ServiceNow). Based in Toronto, open to cloud, DevOps, SRE and application support roles across Canada.">
+<meta property="og:title" content="Paul Jayaprakash | Azure Administrator &amp; Production Support Engineer">
+<meta property="og:description" content="AZ-104 certified. Enterprise banking L2 production support (WebSphere, MQ, Linux, AKS). Toronto, open to roles across Canada.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://pauljayaprakash21.github.io/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A1120'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='30' font-weight='700' fill='%2322D3EE' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231E3A8A'/%3E%3Ctext x='32' y='43' font-family='Georgia' font-size='32' font-weight='700' fill='%23fff' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Paul Udayan Gomez Jayaprakash","jobTitle":"Production Support & Cloud Operations Engineer","url":"https://pauljayaprakash21.github.io/","sameAs":["https://www.linkedin.com/in/paul-gomez21","https://github.com/PaulJayaprakash21"],"address":{"@type":"PostalAddress","addressLocality":"Toronto","addressRegion":"ON","addressCountry":"CA"}}
+{"@context":"https://schema.org","@type":"Person","name":"Paul Udayan Gomez Jayaprakash","jobTitle":"Azure Administrator & Production Support Engineer","email":"mailto:paulgomez.jayaprakash@gmail.com","url":"https://pauljayaprakash21.github.io/","sameAs":["https://www.linkedin.com/in/paul-gomez21","https://github.com/PaulJayaprakash21"],"address":{"@type":"PostalAddress","addressLocality":"Toronto","addressRegion":"ON","addressCountry":"CA"},"knowsAbout":["Microsoft Azure","AKS","Terraform","IBM WebSphere","IBM MQ","Linux","ServiceNow","Incident Management","Change Management"]}
 </script>
+<style>
+  :root{
+    --page:#EEF1F7; --card:#FFFFFF; --ink:#0F172A; --body:#334155; --muted:#64748B;
+    --line:#E2E8F0; --accent:#1D4ED8; --accent-2:#0EA5E9; --soft:#EFF6FF; --ok:#047857;
+    --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,-apple-system,Segoe UI,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:72px}
+  body{font-family:var(--sans);background:var(--page);color:var(--body);line-height:1.65;font-size:16.5px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:6px}
+  strong{color:var(--ink);font-weight:600}
+
+  /* nav */
+  .nav{position:sticky;top:0;z-index:20;background:rgba(238,241,247,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-in{max-width:1040px;margin:0 auto;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between}
+  .brand{font-family:var(--serif);font-weight:700;font-size:19px;color:var(--ink)}
+  .links{display:flex;gap:22px;font-size:14.5px;font-weight:500}
+  .links a{color:var(--muted)} .links a:hover{color:var(--ink);text-decoration:none}
+  @media (max-width:820px){.links{display:none}}
+
+  /* slide cards */
+  main{max-width:1040px;margin:0 auto;padding:28px 24px 64px;display:grid;gap:28px}
+  .slide{background:var(--card);border-radius:22px;padding:56px 60px;box-shadow:0 1px 2px rgba(15,23,42,.04),0 12px 32px rgba(15,23,42,.06)}
+  @media (max-width:700px){.slide{padding:36px 24px;border-radius:18px}}
+  h1,h2{font-family:var(--serif);color:var(--ink);letter-spacing:-.01em;line-height:1.15}
+  h2{font-size:clamp(28px,4vw,38px);margin-bottom:22px}
+  h3{color:var(--ink);font-size:18px;line-height:1.35}
+  .kicker{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+
+  /* hero */
+  .hero{display:grid;grid-template-columns:1.9fr 1fr;gap:32px;align-items:center;
+        background:linear-gradient(135deg,#0B1B4D 0%,#1D4ED8 60%,#0EA5E9 100%);color:#DBEAFE}
+  .hero h1{color:#fff;font-size:clamp(32px,4.6vw,48px);margin:14px 0 12px}
+  .hero .title{font-size:clamp(17px,2.2vw,21px);font-weight:600;color:#fff}
+  .hero .loc{margin-top:8px;color:#BFDBFE}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+         color:#fff;font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px}
+  .badge i{width:8px;height:8px;border-radius:50%;background:#4ADE80;display:inline-block}
+  .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+  .btn{display:inline-block;font-weight:600;font-size:15px;padding:12px 22px;border-radius:12px;transition:transform .15s}
+  .btn:hover{transform:translateY(-2px);text-decoration:none}
+  .btn-w{background:#fff;color:#1E3A8A} .btn-o{border:1.5px solid rgba(255,255,255,.55);color:#fff}
+  .hero-art{justify-self:end;width:100%;max-width:320px}
+  @media (max-width:820px){.hero{grid-template-columns:1fr}.hero-art{display:none}}
+
+  /* profile */
+  .lead{font-size:18.5px;line-height:1.75}
+  .lead + .lead{margin-top:16px}
+  .looking{margin-top:24px;display:flex;flex-wrap:wrap;gap:8px}
+  .pill{font-size:13.5px;font-weight:600;color:var(--accent);background:var(--soft);border:1px solid #DBEAFE;padding:6px 13px;border-radius:999px}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  @media (max-width:820px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .stat .n{font-family:var(--serif);font-size:clamp(40px,6vw,58px);font-weight:700;line-height:1;
+           background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat p{margin-top:10px;font-size:15px;color:var(--muted)}
+  .stat{border-left:3px solid #DBEAFE;padding-left:18px}
+
+  /* skill cards */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:600px){.grid{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:16px;padding:24px;background:#fff;transition:box-shadow .2s,transform .2s}
+  .card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(15,23,42,.08)}
+  .ico{width:46px;height:46px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+  .ico svg{width:24px;height:24px;stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .card h3{margin-bottom:8px}
+  .card p{font-size:15px}
+
+  /* experience */
+  .role{padding:28px 0;border-top:1px solid var(--line)}
+  .role:first-of-type{border-top:none;padding-top:4px}
+  .role-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .role-head h3{font-size:20px}
+  .org{color:var(--accent);font-weight:600;font-size:15.5px;margin-top:2px}
+  .when{font-size:14px;font-weight:600;color:var(--muted);background:var(--page);padding:4px 12px;border-radius:999px}
+  .role ul{list-style:none;margin-top:14px;display:grid;gap:10px}
+  .role li{position:relative;padding-left:22px;font-size:15.5px}
+  .role li::before{content:"";position:absolute;left:2px;top:10px;width:8px;height:8px;border-radius:2px;background:var(--accent-2)}
+  .client{display:inline-block;margin-top:8px;font-size:13.5px;font-weight:600;color:var(--muted)}
+
+  /* projects */
+  .proj{display:flex;flex-direction:column;gap:10px}
+  .proj .status{align-self:flex-start;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+                padding:3px 10px;border-radius:999px;background:#FEF3C7;color:#92400E}
+  .proj .status.done{background:#D1FAE5;color:var(--ok)}
+  .proj p{flex:1}
+  .tags{display:flex;flex-wrap:wrap;gap:6px}
+  .tag{font-size:12.5px;font-weight:500;color:var(--body);background:var(--page);padding:3px 10px;border-radius:8px}
+  .sub{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:34px 0 14px}
+  .sub:first-of-type{margin-top:0}
+
+  /* incidents */
+  .inc{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  @media (max-width:700px){.inc{grid-template-columns:1fr}}
+  details{border:1px solid var(--line);border-radius:14px;padding:18px 20px;background:#fff}
+  summary{cursor:pointer;font-weight:600;color:var(--ink);list-style:none;display:flex;gap:10px;align-items:flex-start}
+  summary::-webkit-details-marker{display:none}
+  summary .sev{flex:none;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;background:#FEE2E2;color:#B91C1C;margin-top:2px}
+  summary .sev.s2{background:#FEF3C7;color:#92400E}
+  summary .sev.chg{background:#DBEAFE;color:#1E40AF}
+  details p{margin-top:12px;font-size:15px}
+  details[open]{box-shadow:0 10px 24px rgba(15,23,42,.06)}
+
+  /* certs */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+  @media (max-width:760px){.two{grid-template-columns:1fr}}
+  .list{list-style:none;display:grid;gap:12px}
+  .list li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px}
+  .list li svg{flex:none;width:20px;height:20px;margin-top:3px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .list .m{display:block;font-size:13.5px;color:var(--muted)}
+
+  /* contact */
+  .contact{text-align:center;background:linear-gradient(135deg,#0B1B4D,#1D4ED8);color:#DBEAFE}
+  .contact h2{color:#fff}
+  .contact .cta{justify-content:center}
+  footer{text-align:center;font-size:13px;color:var(--muted);padding:0 24px 40px}
+
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.card,.btn{transition:none}}
+</style>
 </head>
 <body>
 
 <nav class="nav" aria-label="Site">
-  <div class="wrap nav-inner">
-    <span class="nav-logo"><span class="p">paul@</span>jayaprakash:~$</span>
-    <div class="nav-links" id="navLinks">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#responsibilities">Responsibilities</a>
-      <a href="#incidents">Incident Log</a>
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#contact">Contact</a>
+  <div class="nav-in">
+    <span class="brand">Paul Jayaprakash</span>
+    <div class="links">
+      <a href="#profile">Profile</a><a href="#skills">Skills</a><a href="#experience">Experience</a>
+      <a href="#projects">Projects</a><a href="#incidents">Incidents</a><a href="#certifications">Certifications</a><a href="#contact">Contact</a>
     </div>
-    <button class="hamburger" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
   </div>
 </nav>
-
-<nav class="dock" aria-label="Quick navigation">
-  <a href="#about" data-dock>About</a>
-  <a href="#skills" data-dock>Skills</a>
-  <a href="#incidents" data-dock>Incidents</a>
-  <a href="#projects" data-dock>Projects</a>
-  <a href="#experience" data-dock>Experience</a>
-  <a href="#contact" data-dock>Contact</a>
-</nav>
-
-<header class="hero">
-  <svg class="skyline" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <defs>
-      <radialGradient id="towerGlow" cx="50%" cy="35%" r="55%">
-        <stop offset="0%" stop-color="#34D399" stop-opacity=".24"/>
-        <stop offset="55%" stop-color="#3B82F6" stop-opacity=".1"/>
-        <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
-      </radialGradient>
-      <linearGradient id="buildingFill" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#1B3A3F"/>
-        <stop offset="100%" stop-color="#0F2530"/>
-      </linearGradient>
-      <linearGradient id="towerFill" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#2A6458"/>
-        <stop offset="100%" stop-color="#11332E"/>
-      </linearGradient>
-      <linearGradient id="skyBlueGreen" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%"  stop-color="#0A1120"/>
-        <stop offset="35%" stop-color="#12253D"/>
-        <stop offset="65%" stop-color="#1E3F4A"/>
-        <stop offset="100%" stop-color="#2C5049"/>
-      </linearGradient>
-    </defs>
-
-    <!-- sky -->
-    <rect x="0" y="0" width="1600" height="700" fill="url(#skyBlueGreen)"/>
-
-    <!-- glow behind tower -->
-    <rect x="70" y="0" width="600" height="700" fill="url(#towerGlow)"/>
-
-    <!-- stars -->
-    <g fill="#93A6C0" opacity=".5">
-      <circle cx="120" cy="80" r="1.6"/><circle cx="260" cy="140" r="1.3"/>
-      <circle cx="410" cy="60" r="1.8"/><circle cx="980" cy="90" r="1.4"/>
-      <circle cx="1150" cy="150" r="1.6"/><circle cx="1320" cy="70" r="1.3"/>
-      <circle cx="1480" cy="120" r="1.7"/><circle cx="60" cy="220" r="1.2"/>
-    </g>
-
-    <!-- dramatic layered clouds -->
-    <g fill="#3B5568" opacity=".35">
-      <ellipse cx="200" cy="160" rx="180" ry="50"/>
-      <ellipse cx="80"  cy="190" rx="130" ry="38"/>
-      <ellipse cx="1350" cy="140" rx="200" ry="55"/>
-      <ellipse cx="1180" cy="180" rx="140" ry="40"/>
-    </g>
-    <g fill="#4E7079" opacity=".3">
-      <ellipse class="cloud c1" cx="220" cy="130" rx="120" ry="30"/>
-      <ellipse class="cloud c1" cx="340" cy="110" rx="80"  ry="22"/>
-      <ellipse class="cloud c2" cx="1080" cy="100" rx="150" ry="34"/>
-      <ellipse class="cloud c2" cx="1220" cy="125" rx="90"  ry="22"/>
-    </g>
-    <g fill="#7FA8A0" opacity=".22">
-      <ellipse class="cloud c3" cx="700" cy="90"  rx="170" ry="26"/>
-      <ellipse class="cloud c3" cx="950" cy="150" rx="110" ry="24"/>
-      <ellipse class="cloud c1" cx="1420" cy="170" rx="100" ry="22"/>
-    </g>
-
-    <!-- far skyline (smaller, darker) -->
-    <g fill="#101B2E">
-      <rect x="0"    y="480" width="70"  height="220"/>
-      <rect x="90"   y="440" width="55"  height="260"/>
-      <rect x="880"  y="450" width="60"  height="250"/>
-      <rect x="1520" y="460" width="60"  height="240"/>
-      <rect x="1420" y="420" width="55"  height="280"/>
-    </g>
-
-    <!-- main skyline -->
-    <g fill="url(#buildingFill)">
-      <rect x="40"   y="380" width="80"  height="320"/>
-      <rect x="135"  y="330" width="60"  height="370"/>
-      <rect x="205"  y="410" width="75"  height="290"/>
-      <rect x="290"  y="300" width="65"  height="400"/>
-      <rect x="365"  y="360" width="85"  height="340"/>
-      <rect x="460"  y="320" width="55"  height="380"/>
-      <rect x="1050" y="340" width="70"  height="360"/>
-      <rect x="1130" y="290" width="60"  height="410"/>
-      <rect x="1200" y="380" width="85"  height="320"/>
-      <rect x="1295" y="330" width="60"  height="370"/>
-      <rect x="1365" y="400" width="75"  height="300"/>
-      <rect x="1450" y="350" width="65"  height="350"/>
-      <rect x="1525" y="310" width="60"  height="390"/>
-    </g>
-
-    <!-- lit windows -->
-    <g fill="#34D399" opacity=".8">
-      <rect class="window w1" x="55"  y="410" width="6" height="8"/>
-      <rect class="window w2" x="70"  y="440" width="6" height="8"/>
-      <rect class="window w3" x="150" y="370" width="6" height="8"/>
-      <rect class="window w1" x="220" y="450" width="6" height="8"/>
-      <rect class="window w4" x="305" y="340" width="6" height="8"/>
-      <rect class="window w2" x="380" y="400" width="6" height="8"/>
-      <rect class="window w3" x="475" y="370" width="6" height="8"/>
-      <rect class="window w1" x="1065" y="390" width="6" height="8"/>
-      <rect class="window w4" x="1145" y="330" width="6" height="8"/>
-      <rect class="window w2" x="1215" y="420" width="6" height="8"/>
-      <rect class="window w3" x="1310" y="380" width="6" height="8"/>
-      <rect class="window w1" x="1380" y="450" width="6" height="8"/>
-      <rect class="window w4" x="1465" y="400" width="6" height="8"/>
-      <rect class="window w2" x="1540" y="360" width="6" height="8"/>
-    </g>
-    <g fill="#22D3EE" opacity=".6">
-      <rect class="window w2" x="95"  y="470" width="5" height="7"/>
-      <rect class="window w4" x="235" y="480" width="5" height="7"/>
-      <rect class="window w1" x="395" y="440" width="5" height="7"/>
-      <rect class="window w3" x="1080" y="430" width="5" height="7"/>
-      <rect class="window w2" x="1230" y="470" width="5" height="7"/>
-      <rect class="window w4" x="1415" y="490" width="5" height="7"/>
-    </g>
-
-    <!-- CN Tower — refined silhouette: tapered shaft, main pod, SkyPod, antenna -->
-    <g fill="url(#towerFill)" class="tower-antenna">
-      <rect x="366" y="70" width="6" height="110"/>
-      <circle cx="369" cy="70" r="3" fill="#F87171" opacity=".95"/>
-    </g>
-    <g fill="url(#towerFill)">
-      <!-- tapered main shaft: wider at base, narrowing toward the pod -->
-      <path d="M 352 700 L 386 700 L 380 250 L 358 250 Z"/>
-      <!-- main observation pod -->
-      <ellipse cx="369" cy="230" rx="34" ry="20"/>
-      <rect x="345" y="225" width="48" height="18" rx="3"/>
-      <!-- lower SkyPod -->
-      <ellipse cx="369" cy="290" rx="20" ry="11"/>
-    </g>
-    <!-- glass window band around the main pod -->
-    <rect x="339" y="223" width="60" height="7" rx="2" fill="#22D3EE" opacity=".4"/>
-    <!-- pod highlight rim for depth -->
-    <ellipse cx="369" cy="222" rx="34" ry="6" fill="#3B82F6" opacity=".35"/>
-    <!-- support struts beneath the pod -->
-    <g stroke="url(#towerFill)" stroke-width="2" opacity=".8">
-      <line x1="350" y1="248" x2="360" y2="270"/>
-      <line x1="388" y1="248" x2="378" y2="270"/>
-    </g>
-  </svg>
-  <div class="wrap">
-    <h1>Paul Udayan Gomez Jayaprakash</h1>
-    <p class="role"><strong>Production Support &amp; Cloud Operations Engineer</strong></p>
-    <p class="role" style="font-size:16px;margin-top:8px;color:var(--faint)">3+ years keeping enterprise banking systems online, 24/7.</p>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="https://github.com/PaulJayaprakash21">GitHub</a>
-      <a class="btn btn-ghost" href="https://www.linkedin.com/in/paul-gomez21">LinkedIn</a>
-    </div>
-    <p class="statusline" style="margin-top:28px;margin-bottom:0">TORONTO, ONTARIO, CANADA</p>
-  </div>
-</header>
-
-<div class="wrap">
-  <div class="stats reveal">
-    <div class="stat"><div class="num">3+ yrs</div><div class="lbl">Enterprise production support for financial services platforms</div></div>
-    <div class="stat"><div class="num">24/7</div><div class="lbl">High-pressure banking production environment — changes executed and deployed without errors or outages</div></div>
-    <div class="stat"><div class="num">3×</div><div class="lbl">Rated top performer at Cognizant all three years, with multiple client appreciations</div></div>
-  </div>
-</div>
 
 <main>
 
-<section id="about">
-  <div class="wrap reveal">
-    <p class="eyebrow">Profile</p>
-    <h2>Keeping enterprise systems online — and moving them to the cloud.</h2>
-    <p class="lede">
-      I spent over 3 years at <strong>Cognizant</strong> supporting enterprise banking applications in
-      high-availability production environments. My work focused on <strong>IBM WebSphere</strong>,
-      <strong>IBM MQ</strong>, incident management, release validation, disaster recovery testing, middleware
-      administration, and resolving P1/P2 production issues while meeting strict SLA commitments.
-    </p>
-    <p class="lede" style="margin-top:16px">
-      After relocating to Canada, I completed a Postgraduate Certificate in Big Data Analytics &amp; AI with Honors
-      at Georgian College and expanded my expertise into <strong>Microsoft Azure</strong>, building hands-on
-      experience with AKS, Azure Container Registry, Service Bus, Traffic Manager, Terraform, Azure DevOps, and
-      cloud-native deployments. I also work with SQL, Power BI, Tableau, Docker, Kubernetes, and Python, and hold
-      Microsoft Azure Fundamentals (AZ-900) and ITIL v3 Foundation certifications.
-    </p>
-  </div>
-</section>
+  <!-- HERO -->
+  <header class="slide hero">
+    <div>
+      <span class="badge"><i></i>Open to work · Authorized to work in Canada</span>
+      <h1>Paul Udayan Gomez Jayaprakash</h1>
+      <p class="title">Azure Administrator (AZ-104) - Production Support Engineer - DevOps</p>
+      <p class="loc">Toronto, Ontario, Canada · Open to relocation</p>
+      <div class="cta">
+        <a class="btn btn-w" href="mailto:paulgomez.jayaprakash@gmail.com?subject=Opportunity%20for%20Paul%20Jayaprakash">Email me</a>
+        <a class="btn btn-o" href="https://www.linkedin.com/in/paul-gomez21">LinkedIn</a>
+        <a class="btn btn-o" href="https://github.com/PaulJayaprakash21">GitHub</a>
+      </div>
+    </div>
+    <svg class="hero-art" viewBox="0 0 320 260" aria-hidden="true">
+      <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#BAE6FD" stop-opacity=".8"/></linearGradient></defs>
+      <path d="M86 118a52 52 0 0 1 100-16 40 40 0 0 1 58 36 34 34 0 0 1-6 66H92a44 44 0 0 1-6-86z" fill="url(#g1)"/>
+      <g fill="#1D4ED8" opacity=".9">
+        <rect x="112" y="140" width="96" height="16" rx="4"/><rect x="112" y="162" width="96" height="16" rx="4"/>
+      </g>
+      <g fill="#4ADE80"><circle cx="124" cy="148" r="3"/><circle cx="124" cy="170" r="3"/></g>
+      <g stroke="#fff" stroke-width="2" stroke-dasharray="4 5" opacity=".7" fill="none">
+        <path d="M160 200v30"/><path d="M160 230H70"/><path d="M160 230h90"/>
+      </g>
+      <g fill="#fff" opacity=".9"><rect x="52" y="222" width="36" height="22" rx="5"/><rect x="142" y="222" width="36" height="22" rx="5" opacity=".0"/><rect x="232" y="222" width="36" height="22" rx="5"/></g>
+    </svg>
+  </header>
 
-<section id="skills">
-  <div class="wrap reveal">
-    <p class="eyebrow">Skills</p>
+  <!-- PROFILE -->
+  <section id="profile" class="slide reveal">
+    <p class="kicker">Profile</p>
+    <h2>Keeping banking systems online, and running them on Azure</h2>
+    <p class="lead">Production support engineer with <strong>nearly 3 years of L2 support</strong> at Cognizant for a <strong>major North American bank</strong>, covering 100+ applications in a 24/7 environment. Hands-on with <strong>Linux, IBM WebSphere, IBM MQ, AKS, Jenkins, Argo CD and Terraform</strong>, and experienced in incident, problem and change management through ServiceNow.</p>
+    <p class="lead"><strong>Microsoft Certified: Azure Administrator Associate (AZ-104)</strong>, with two postgraduate certificates from Georgian College (Big Data Analytics, and Artificial Intelligence). Currently a <strong>Support Analyst at Bill Gosling Outsourcing</strong> in Ontario, giving first-line technical support on dialer, CRM and Salesforce systems.</p>
+    <div class="looking">
+      <span class="pill">Azure Cloud Engineer</span><span class="pill">DevOps</span><span class="pill">SRE</span>
+      <span class="pill">Production Support</span><span class="pill">Application Support</span><span class="pill">Middleware</span><span class="pill">IT Service Desk</span>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="slide reveal" aria-label="Key numbers">
+    <div class="stats">
+      <div class="stat"><div class="n">100+</div><p>Banking applications supported in a 24/7 L2 team</p></div>
+      <div class="stat"><div class="n">15-20</div><p>Production incidents and tickets handled daily within SLA</p></div>
+      <div class="stat"><div class="n">5-15</div><p>Production changes a month, mostly weekend windows</p></div>
+      <div class="stat"><div class="n">4</div><p>Environments supported: Dev, Test, QAT and Prod</p></div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="slide reveal">
+    <p class="kicker">Skills</p>
     <h2>What I work with</h2>
-    <div class="toolgrid">
-      <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Microsoft Azure" loading="lazy"><span>Azure</span></div>
-      <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" loading="lazy"><span>Docker</span></div>
-      <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-original.svg" alt="Kubernetes" loading="lazy"><span>Kubernetes</span></div>
-      <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform" loading="lazy"><span>Terraform</span></div>
-      <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" alt="Jenkins" loading="lazy"><span>Jenkins</span></div>
-      <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" alt="Prometheus" loading="lazy"><span>Prometheus</span></div>
-      <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" alt="Grafana" loading="lazy"><span>Grafana</span></div>
-      <div class="tool"><img src="https://cdn.simpleicons.org/datadog/9F8FEF" alt="Datadog" loading="lazy"><span>Datadog</span></div>
-      <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" loading="lazy"><span>Python</span></div>
-      <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" alt="Bash" loading="lazy"><span>Bash</span></div>
-      <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" loading="lazy"><span>Linux</span></div>
-      <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redhat/redhat-original.svg" alt="Red Hat Enterprise Linux" loading="lazy"><span>RHEL</span></div>
-      <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tomcat/tomcat-original.svg" alt="Apache Tomcat" loading="lazy"><span>Tomcat</span></div>
-      <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" loading="lazy"><span>Git</span></div>
-      <div class="tool"><img src="https://cdn.simpleicons.org/github/E8EFF8" alt="GitHub" loading="lazy"><span>GitHub</span></div>
-      <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" alt="Jira" loading="lazy"><span>Jira</span></div>
-      <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="Amazon Web Services" loading="lazy"><span>AWS</span></div>
-      <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azuresqldatabase/azuresqldatabase-original.svg" alt="SQL" loading="lazy"><span>SQL</span></div>
-      <div class="tool"><img src="assets/powerbi.png" alt="Power BI" loading="lazy" onerror="this.style.display='none'"><span>Power BI</span></div>
-      <div class="tool"><img src="assets/tableau.png" alt="Tableau" loading="lazy" onerror="this.style.display='none'"><span>Tableau</span></div>
-    </div>
-    <div class="skills">
-      <div class="skill">
-        <h3><span class="ico">☁</span>Cloud — Azure</h3>
-        <p>AKS, Azure Container Registry, Service Bus, Traffic Manager, App Services, Azure Monitor, ARM templates, Terraform, Azure DevOps &amp; Git. AZ-900 certified (921/1000).</p>
+    <div class="grid">
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M7 18a5 5 0 0 1-.5-10A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9z"/></svg></div>
+        <h3>Cloud: Microsoft Azure</h3>
+        <p>VMs, VNets, NSGs, App Services, AKS, ACR, Key Vault, Azure Monitor, Entra ID and RBAC. AZ-104 and AZ-900 certified.</p>
       </div>
-      <div class="skill">
-        <h3><span class="ico">⎈</span>ITSM &amp; Process</h3>
-        <p>ServiceNow and JIRA — incident, problem and change management. ITIL v3 processes, SLA-driven operations, post-release checkouts, DR testing, RCA documentation.</p>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 7h10M4 12h16M4 17h7"/><circle cx="17" cy="7" r="2"/><circle cx="14" cy="17" r="2"/></svg></div>
+        <h3>DevOps &amp; CI/CD</h3>
+        <p>Terraform, Jenkins, Azure DevOps, GitHub Actions, Argo CD, Nexus, Git, Docker and Kubernetes (kubectl rollouts, logs and troubleshooting).</p>
       </div>
-      <div class="skill">
-        <h3><span class="ico">◉</span>Monitoring &amp; Observability</h3>
-        <p>Datadog, AppDynamics, Prometheus, Grafana — application health monitoring, log analysis, alert management and tuning, anomaly detection, performance diagnostics, dashboard building.</p>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3M12 15h5"/></svg></div>
+        <h3>Linux &amp; Automation</h3>
+        <p>RHEL and Linux administration: systemctl, cron, logs, patching, SSH keys, disk and performance checks. Ansible, Bash, PowerShell and Python.</p>
       </div>
-      <div class="skill">
-        <h3><span class="ico">⇄</span>Stakeholders &amp; SME Work</h3>
-        <p>SME to senior stakeholders, liaison between users, technology groups and vendors — translating complex technical detail for both technical and business audiences.</p>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg></div>
+        <h3>Middleware &amp; App Servers</h3>
+        <p>IBM WebSphere ND (patching, JVMs, EAR/WAR deployments), IBM MQ administration (queue managers, channels, clustering, SSL), Apache httpd, Tomcat.</p>
       </div>
-      <div class="skill">
-        <h3><span class="ico">☁</span>Cloud — AWS</h3>
-        <p>AWS Academy certified across Cloud Foundations, Cloud Architecting, Data Engineering and Machine Learning Foundations — core services, architecture patterns and data pipelines.</p>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg></div>
+        <h3>Monitoring &amp; Observability</h3>
+        <p>Splunk, Datadog, AppDynamics, Prometheus and Grafana for health checks, log analysis and alert investigation. cURL and Postman for API checks.</p>
       </div>
-      <div class="skill">
-        <h3><span class="ico">&gt;_</span>OS &amp; Scripting</h3>
-        <p>Linux / RHEL administration, Bash scripting for log analysis and operational automation, Python, Docker, JSON, Git-based workflows.</p>
-      </div>
-      <div class="skill">
-        <h3><span class="ico">⌬</span>Middleware &amp; App Servers</h3>
-        <p>IBM WebSphere Application Server, IBM MQ (queue managers, channels, listeners), Apache Tomcat, JVM tuning, heap/OOM and GC log analysis, SSL certificate and keystore management.</p>
-      </div>
-      <div class="skill">
-        <h3><span class="ico">▦</span>Data &amp; Dashboards</h3>
-        <p>SQL for querying and analysis, Power BI and Tableau dashboards built for academic and stakeholder-facing projects, including an ML-driven crop yield dashboard deployed on Azure.</p>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></div>
+        <h3>ITSM &amp; Access</h3>
+        <p>ServiceNow incidents, RITMs, changes through CAB and PIRs. ITIL v3. Active Directory, Microsoft 365, LDAP, access provisioning, Oracle and SQL Server credential rotation.</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="responsibilities">
-  <div class="wrap reveal">
-    <p class="eyebrow">Production Environment</p>
-    <h2>What I actually worked with — and did</h2>
-    <div class="skills" style="grid-template-columns:repeat(2,1fr)">
-      <div class="skill">
-        <h3><span class="ico">▣</span>Tech Stack at Cognizant</h3>
-        <p style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px">
-          <span class="tag">IBM WebSphere ND</span><span class="tag">IBM MQ</span><span class="tag">Apache (Web Server)</span>
-          <span class="tag">Apache Tomcat (App Server)</span><span class="tag">Jenkins</span><span class="tag">Ansible</span>
-          <span class="tag">Linux / RHEL</span><span class="tag">AppDynamics</span><span class="tag">Datadog</span>
-          <span class="tag">ServiceNow</span><span class="tag">JIRA</span><span class="tag">SSL</span>
-          <span class="tag">JVM / GC Logs</span><span class="tag">Bash</span><span class="tag">Microsoft Office</span>
-        </p>
-      </div>
-      <div class="skill">
-        <h3><span class="ico">✓</span>Day-to-Day Responsibilities</h3>
-        <p style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px">
-          <span class="tag">Incident Management</span><span class="tag">Problem Management</span><span class="tag">Change Management</span>
-          <span class="tag">Release Validation</span><span class="tag">Disaster Recovery</span><span class="tag">Middleware Admin</span>
-          <span class="tag">Monitoring</span><span class="tag">Automation</span><span class="tag">RCA Documentation</span>
-          <span class="tag">Stakeholder Communication</span><span class="tag">WAS Patching &amp; Fix Packs</span>
-          <span class="tag">MQ Object Creation/Deletion</span><span class="tag">App Deployment &amp; Decommissioning</span>
-          <span class="tag">DR Check Calls</span><span class="tag">Code Red / Severity Bridge Calls</span>
-          <span class="tag">Client &amp; Stakeholder Troubleshooting</span><span class="tag">DB Password Resets</span>
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+  <!-- EXPERIENCE -->
+  <section id="experience" class="slide reveal">
+    <p class="kicker">Experience</p>
+    <h2>Where I've worked</h2>
 
-<section id="incidents">
-  <div class="wrap reveal">
-    <p class="eyebrow">Incident Log</p>
-    <h2>Real incidents, real resolutions</h2>
-    <p class="lede">A selection of production incidents I owned or played a key role in at Cognizant. Details are generalized to respect client confidentiality — happy to walk through any of them in depth.</p>
-
-    <p class="incident-group">Middleware</p>
-    <div class="incidents">
-      <div class="project incident-card">
-        <button class="incident-toggle" aria-expanded="false">
-          <span class="feat">SEV 1</span>
-          <h3>MQ outage caused by NAS file lock</h3>
-          <p class="teaser">Queue manager failure disrupting message flow for banking applications.</p>
-          <span class="incident-chev">▾</span>
-        </button>
-        <div class="incident-details">
-          <div class="incident-details-inner">
-            <p>Traced the failure to a stale file lock on NAS storage backing the queue manager, coordinated with storage teams, and restored messaging safely without data loss. Middleware incidents often live below the middleware — knowing the storage and OS layer is what closes P1s.</p>
-            <div class="tags"><span class="tag">INC-MQ-NAS</span><span class="tag">RESOLVED</span></div>
-          </div>
-        </div>
+    <div class="role">
+      <div class="role-head">
+        <div><h3>Support Analyst</h3><p class="org">Bill Gosling Outsourcing · Barrie, ON</p></div>
+        <span class="when">Current</span>
       </div>
+      <ul>
+        <li><strong>First-line technical support:</strong> resolve login, access and application issues on the dialer/telephony system, CRM, Salesforce and Microsoft 365 apps so agents stay productive.</li>
+        <li><strong>Live troubleshooting:</strong> isolate whether a dialer, CRM or Salesforce error is user, configuration or system side, and escalate to IT with logs, screenshots and steps to reproduce.</li>
+        <li><strong>Testing and rollout:</strong> test new system features, updates and workflow changes before rollout and report defects back to IT and operations.</li>
+        <li><strong>Documentation:</strong> write SOPs, how-to guides and workarounds for recurring issues, and build Excel reports and trackers.</li>
+        <li><strong>Compliance:</strong> work across multiple systems to resolve tickets and process payments while handling sensitive data under strict SOPs and SLAs.</li>
+      </ul>
     </div>
 
-    <p class="incident-group">WebSphere</p>
-    <div class="incidents">
-      <div class="project incident-card">
-        <button class="incident-toggle" aria-expanded="false">
-          <span class="feat">SEV 1</span>
-          <h3>Application outage from JVM OutOfMemory</h3>
-          <p class="teaser">WebSphere application server crashing under load, affecting a customer-facing banking service.</p>
-          <span class="incident-chev">▾</span>
-        </button>
-        <div class="incident-details">
-          <div class="incident-details-inner">
-            <p>Analyzed heap dumps and verbose GC logs, identified the memory pressure pattern, and drove the fix with the app team along with heap tuning to stabilize the JVM. Restarting buys minutes; reading the heap dump buys a permanent fix.</p>
-            <div class="tags"><span class="tag">INC-JVM-OOM</span><span class="tag">RESOLVED</span></div>
-          </div>
-        </div>
+    <div class="role">
+      <div class="role-head">
+        <div><h3>Associate - Production Support Engineer</h3><p class="org">Cognizant Technology Solutions</p></div>
+        <span class="when">Aug 2021 - Apr 2024</span>
       </div>
+      <span class="client">Client: Major North American Bank (Banking Domain)</span>
+      <ul>
+        <li><strong>Incident management:</strong> owned P1/P2 incidents in a 24/7 L2 team across 100+ applications, handling 15-20 tickets a day within SLA, joining bridge calls and documenting RCAs in ServiceNow.</li>
+        <li><strong>Change management:</strong> ran 5-15 production changes a month, raised emergency changes through CAB, and did pre/post-implementation checks, often handling multi-change weekend windows solo.</li>
+        <li><strong>Zero-downtime releases:</strong> patched and upgraded applications by moving traffic between the bank's two data centres, validating one before switching over the other.</li>
+        <li><strong>Kubernetes and GitOps:</strong> supported AKS workloads with kubectl (get, describe, logs, restarts, rollouts), troubleshot failing pods and deployed releases through Jenkins and Argo CD.</li>
+        <li><strong>CI/CD support:</strong> troubleshot and re-ran failed Jenkins jobs, pulled versioned EAR/WAR artifacts from Nexus, and used Git to track releases across Dev, Test, QAT and Prod.</li>
+        <li><strong>Infrastructure as code:</strong> updated Terraform configurations to add Azure resources requested by development teams, reviewing plans before apply.</li>
+        <li><strong>Automation:</strong> used Ansible playbooks to scan application logs for errors across multiple servers, cutting manual checks during incidents.</li>
+        <li><strong>Middleware administration:</strong> WebSphere patching and JVM management, IBM MQ queue managers, channels and clustering, SSL certificate renewals on Apache, and SSH key management.</li>
+        <li><strong>Monitoring:</strong> tracked application health in AppDynamics, Datadog and Splunk, rolled out Splunk agents on VMs, and supported DR check calls and failover tests.</li>
+      </ul>
     </div>
 
-    <p class="incident-group">CI/CD &amp; Automation</p>
-    <div class="incidents">
-      <div class="project incident-card">
-        <button class="incident-toggle" aria-expanded="false">
-          <span class="feat">SEV 2</span>
-          <h3>Jenkins pipeline failure on automated deployment</h3>
-          <p class="teaser">An automated deployment pipeline stopped completing successfully, blocking scheduled deployments and service restarts.</p>
-          <span class="incident-chev">▾</span>
-        </button>
-        <div class="incident-details">
-          <div class="incident-details-inner">
-            <p>Troubleshot the Jenkins build logs to isolate where the pipeline was failing, fixed the underlying issue on the server, and confirmed the pipeline ran cleanly end-to-end again. A broken pipeline is still a production incident — it just fails silently until someone needs a deployment to go out.</p>
-            <div class="tags"><span class="tag">INC-JENKINS-PIPE</span><span class="tag">RESOLVED</span></div>
-          </div>
-        </div>
+    <div class="role">
+      <div class="role-head">
+        <div><h3>ML Data Associate</h3><p class="org">Amazon Development Centre India · Chennai</p></div>
+        <span class="when">Sep 2020 - Apr 2021</span>
       </div>
+      <ul>
+        <li><strong>AI training data:</strong> transcribed and tagged Alexa audio data used to train AI models, measured on quality and speed.</li>
+        <li><strong>Data validation:</strong> ran SQL queries to check and validate data, and worked with technical teams to resolve data issues on time.</li>
+        <li><strong>Process:</strong> contributed to process standardization, maintaining documentation and sharing updates across the team.</li>
+      </ul>
     </div>
+  </section>
 
-    <p class="incident-group">Linux</p>
-    <div class="incidents">
-      <div class="project incident-card">
-        <button class="incident-toggle" aria-expanded="false">
-          <span class="feat">SEV 2</span>
-          <h3>Sustained high CPU degrading application response</h3>
-          <p class="teaser">A production Linux host ran sustained high CPU utilization, slowing response times for the applications hosted on it.</p>
-          <span class="incident-chev">▾</span>
-        </button>
-        <div class="incident-details">
-          <div class="incident-details-inner">
-            <p>Used top/ps and process-level analysis to identify the runaway process, worked with the app team to address the underlying cause, and confirmed CPU and response times returned to normal. Resource exhaustion incidents usually have a single runaway process behind them — finding it fast is the whole job.</p>
-            <div class="tags"><span class="tag">INC-CPU-HIGH</span><span class="tag">RESOLVED</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="project incident-card">
-        <button class="incident-toggle" aria-expanded="false">
-          <span class="feat">SEV 2</span>
-          <h3>Filesystem full, halting application logging</h3>
-          <p class="teaser">A filesystem filled to capacity, stopping application logs from writing and risking a broader service impact.</p>
-          <span class="incident-chev">▾</span>
-        </button>
-        <div class="incident-details">
-          <div class="incident-details-inner">
-            <p>Cleared archived logs to free space, restarted the affected services, and set a proactive disk-usage alert threshold to catch it earlier next time. The fix is five minutes; the monitoring threshold is what stops it from becoming a recurring page.</p>
-            <div class="tags"><span class="tag">INC-DISK-FULL</span><span class="tag">RESOLVED</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <p class="incident-group">Security</p>
-    <div class="incidents">
-      <div class="project incident-card">
-        <button class="incident-toggle" aria-expanded="false">
-          <span class="feat">SEV 1</span>
-          <h3>Service failure from expired SSL certificate</h3>
-          <p class="teaser">Secure connections failing between application components after a certificate expired.</p>
-          <span class="incident-chev">▾</span>
-        </button>
-        <div class="incident-details">
-          <div class="incident-details-inner">
-            <p>Identified the expired cert in the chain, coordinated renewal and keystore updates, and restored connectivity. Followed up with tracking so expiries were caught before they became incidents. The best P1 is the one your monitoring catches thirty days early.</p>
-            <div class="tags"><span class="tag">INC-SSL-EXP</span><span class="tag">RESOLVED</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <p class="incident-group">Release Management</p>
-    <div class="incidents">
-      <div class="project incident-card">
-        <button class="incident-toggle" aria-expanded="false">
-          <span class="feat">SEV 1</span>
-          <h3>Failed production deployment requiring rollback</h3>
-          <p class="teaser">A production deployment introduced application errors affecting service availability shortly after go-live.</p>
-          <span class="incident-chev">▾</span>
-        </button>
-        <div class="incident-details">
-          <div class="incident-details-inner">
-            <p>Executed the pre-planned rollback, validated services were restored to the last known good state, coordinated with the development team on the root cause, and opened an RCA for follow-up. A deployment without a tested rollback plan isn't really a deployment plan — it's a gamble with an extra step.</p>
-            <div class="tags"><span class="tag">INC-DEPLOY-RB</span><span class="tag">RESOLVED</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="project incident-card">
-        <button class="incident-toggle" aria-expanded="false">
-          <span class="feat">EMERGENCY</span>
-          <h3>Weekend emergency change under CAB approval</h3>
-          <p class="teaser">A production issue required a fix outside the standard change window, going through expedited CAB (Change Advisory Board) approval for an emergency deployment.</p>
-          <span class="incident-chev">▾</span>
-        </button>
-        <div class="incident-details">
-          <div class="incident-details-inner">
-            <p>Prepared the change and rollback plan on short notice, got emergency approval, executed the deployment, and validated the fix before closing out the change. Emergency changes still need a rollback plan — "urgent" is not a substitute for "tested."</p>
-            <div class="tags"><span class="tag">CHG-EMERG</span><span class="tag">COMPLETED</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <p class="incident-group">Operations</p>
-    <div class="incidents">
-      <div class="project incident-card">
-        <button class="incident-toggle" aria-expanded="false">
-          <span class="feat">SEV 2</span>
-          <h3>Database connectivity failure from exhausted connection pool</h3>
-          <p class="teaser">Applications began failing to reach the database after the connection pool was exhausted.</p>
-          <span class="incident-chev">▾</span>
-        </button>
-        <div class="incident-details">
-          <div class="incident-details-inner">
-            <p>Investigated the listener and connection pool state, restarted the affected services, and validated that transactions resumed processing normally. Connection pool exhaustion is a symptom — the real question is what stopped releasing connections upstream.</p>
-            <div class="tags"><span class="tag">INC-DB-CONN</span><span class="tag">RESOLVED</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="project incident-card">
-        <button class="incident-toggle" aria-expanded="false">
-          <span class="feat">MONITORING</span>
-          <h3>AppDynamics/Datadog alert investigation</h3>
-          <p class="teaser">A latency spike alert fired in AppDynamics/Datadog, requiring investigation before it escalated into a customer-facing issue.</p>
-          <span class="incident-chev">▾</span>
-        </button>
-        <div class="incident-details">
-          <div class="incident-details-inner">
-            <p>Traced the alert through APM transaction traces to isolate the slow component, ruled out a false positive, and worked with the app team on the underlying fix. Good monitoring produces alerts you have to investigate, not just ones you have to silence.</p>
-            <div class="tags"><span class="tag">INC-APM-ALERT</span><span class="tag">RESOLVED</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="project incident-card">
-        <button class="incident-toggle" aria-expanded="false">
-          <span class="feat">SEV 2</span>
-          <h3>Application performance degradation under load</h3>
-          <p class="teaser">Application response times degraded noticeably under production load, short of a full outage but affecting user experience.</p>
-          <span class="incident-chev">▾</span>
-        </button>
-        <div class="incident-details">
-          <div class="incident-details-inner">
-            <p>Identified a thread pool bottleneck through monitoring and thread dump analysis, adjusted JVM/thread pool configuration, and validated response times returned to normal. Not every incident is down/up — slow is still an incident, and it's often the harder one to diagnose.</p>
-            <div class="tags"><span class="tag">INC-PERF-DEGR</span><span class="tag">RESOLVED</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="project incident-card">
-        <button class="incident-toggle" aria-expanded="false">
-          <span class="feat">DR EXERCISE</span>
-          <h3>Disaster recovery check call and failover validation</h3>
-          <p class="teaser">Participated in scheduled DR check calls and failover testing to validate recovery readiness for banking application environments.</p>
-          <span class="incident-chev">▾</span>
-        </button>
-        <div class="incident-details">
-          <div class="incident-details-inner">
-            <p>Monitored application failover and database synchronization during the exercise, supported business validation of recovered services, and confirmed recovery met expected timelines. DR only works if it's rehearsed — the exercise is where you find the gaps the runbook didn't mention.</p>
-            <div class="tags"><span class="tag">DR-FAILOVER</span><span class="tag">COMPLETED</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="project incident-card">
-        <button class="incident-toggle" aria-expanded="false">
-          <span class="feat">CHANGE</span>
-          <h3>Eight critical changes executed solo in one window</h3>
-          <p class="teaser">A change window where I was the sole engineer responsible for executing eight critical production changes.</p>
-          <span class="incident-chev">▾</span>
-        </button>
-        <div class="incident-details">
-          <div class="incident-details-inner">
-            <p>Planned sequencing and rollback for each change, executed methodically with verification at every step, and completed all eight without incident. Separately caught a near double-deployment before it hit production. Checklists and rollback plans are what let one person safely do the work of a team.</p>
-            <div class="tags"><span class="tag">CHG-X8-SOLO</span><span class="tag">COMPLETED</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="projects">
-  <div class="wrap reveal">
-    <p class="eyebrow">Projects</p>
+  <!-- PROJECTS -->
+  <section id="projects" class="slide reveal">
+    <p class="kicker">Projects</p>
     <h2>Things I've built</h2>
-    <p class="lede">Three data &amp; AI projects from my postgraduate work, and three cloud/infrastructure projects from my Azure track.</p>
-
-    <p class="incident-group">Data &amp; AI</p>
-    <div class="projects">
-      <article class="project">
-        <h3>RISE Smart Scoring &amp; Feedback</h3>
-        <p>Built the NLP scoring pipeline and Streamlit app for an applicant evaluation tool, semantically scoring project abstracts against a four-criterion rubric and generating per-applicant feedback.</p>
-        <div class="tags"><span class="tag">Python</span><span class="tag">NLP</span><span class="tag">Streamlit</span><span class="tag">scikit-learn</span></div>
+    <p class="sub">Cloud, DevOps &amp; SRE</p>
+    <div class="grid">
+      <article class="card proj">
+        <span class="status">In progress</span>
+        <h3>TaskFlow: GitOps Platform on AKS</h3>
+        <p>A containerized REST API on AKS. Terraform provisions AKS, ACR, Key Vault and networking with remote state. GitHub Actions builds and scans images using OIDC, Argo CD syncs manifests, and secrets come from Key Vault through workload identity.</p>
+        <div class="tags"><span class="tag">AKS</span><span class="tag">Terraform</span><span class="tag">GitHub Actions</span><span class="tag">Argo CD</span><span class="tag">Key Vault</span></div>
       </article>
-      <article class="project">
-        <h3>Winter Road Risk Forecast</h3>
-        <p>Built a decision support pipeline pulling live weather forecasts to score road conditions into risk bands and generate maintenance recommendations, with automated PDF reporting.</p>
-        <div class="tags"><span class="tag">Python</span><span class="tag">Weather API</span><span class="tag">Data Modeling</span><span class="tag">Docker</span></div>
+      <article class="card proj">
+        <span class="status">In progress</span>
+        <h3>Azure Hub-Spoke Landing Zone</h3>
+        <p>Reusable Terraform modules for a hub VNet with Azure Firewall and Bastion, peered spokes, NSGs, private endpoints and RBAC. Azure Policy enforces tags and regions, and a PR pipeline runs validate, tfsec and plan with a gated apply.</p>
+        <div class="tags"><span class="tag">Terraform Modules</span><span class="tag">Networking</span><span class="tag">Azure Policy</span><span class="tag">CI/CD</span></div>
       </article>
-      <article class="project">
-        <h3>Crop Yield BI Dashboard</h3>
-        <p>Built a SQL-based data cleaning pipeline and Power BI dashboard analyzing crop yield against soil type, soil pH, and environmental conditions across 35,000+ records.</p>
-        <div class="tags"><span class="tag">SQL</span><span class="tag">Power BI</span><span class="tag">Data Engineering</span></div>
+      <article class="card proj">
+        <span class="status">In progress</span>
+        <h3>Observability &amp; Auto-Remediation</h3>
+        <p>Azure Monitor and Log Analytics with KQL alerts for CPU, disk and stopped services. Action groups trigger an Automation runbook that fixes the issue before paging, and Grafana tracks SLOs and error budgets.</p>
+        <div class="tags"><span class="tag">Azure Monitor</span><span class="tag">KQL</span><span class="tag">Runbooks</span><span class="tag">Grafana</span><span class="tag">SRE</span></div>
       </article>
-    </div>
-
-    <p class="incident-group">Cloud &amp; DevOps</p>
-    <div class="projects">
-      <article class="project">
+      <article class="card proj">
+        <span class="status done">Completed</span>
         <h3>Azure Infrastructure as Code</h3>
-        <p>Provisioned a networked Azure environment with Terraform — VNet, NSG, storage, an App Service web app secured with managed identity, and Azure SQL — following least-privilege and infrastructure-as-code practices.</p>
+        <p>Provisioned a networked Azure environment with Terraform: VNet, NSG, storage, an App Service secured with managed identity, and Azure SQL, following least-privilege practices.</p>
         <div class="tags"><span class="tag">Terraform</span><span class="tag">Azure</span><span class="tag">IaC</span></div>
       </article>
-      <article class="project">
-        <h3>CI/CD Pipeline for Containerized Deployment</h3>
-        <p>Building an end-to-end pipeline — build, test, container image scan, push to registry, deploy to Kubernetes — using Docker, a container registry, and vulnerability scanning as part of hands-on AKS deployment practice.</p>
-        <div class="tags"><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">CI/CD</span><span class="tag">AKS</span></div>
+      <article class="card proj">
+        <span class="status done">Completed</span>
+        <h3>Azure Disaster Recovery with Terraform</h3>
+        <p>Built a disaster recovery setup in Azure with Terraform, provisioning a secondary region so workloads can fail over, and tested the recovery steps end to end.</p>
+        <div class="tags"><span class="tag">Terraform</span><span class="tag">Azure</span><span class="tag">DR</span></div>
       </article>
-      <article class="project">
-        <h3>Infrastructure Monitoring &amp; Alerting Pipeline</h3>
-        <p>Building a monitoring and alerting pipeline integrating Prometheus and Grafana for application observability, with Azure Monitor for cloud resource health tracking and automated alert workflows.</p>
-        <div class="tags"><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">Azure Monitor</span><span class="tag">Jenkins</span></div>
+      <article class="card proj">
+        <span class="status done">Completed</span>
+        <h3>Three-Tier Architecture on Azure</h3>
+        <p>Deployed a web server and an application server in a three-tier layout on Azure VMs, with separate subnets and NSG rules between the web, app and data tiers.</p>
+        <div class="tags"><span class="tag">Azure VMs</span><span class="tag">VNet / NSG</span><span class="tag">Linux</span></div>
       </article>
     </div>
-  </div>
-</section>
 
-<section id="experience">
-  <div class="wrap reveal">
-    <p class="eyebrow">Experience</p>
-    <h2>Where I've worked</h2>
-    <div class="timeline">
-      <div class="job">
-        <div class="job-head">
-          <div class="job-title">
-            <span class="co-logo"><img src="assets/cognizant.png" alt="Cognizant" onerror="this.parentElement.style.display='none'"></span>
-            <h3>Associate — Production Support Engineer <span class="org">· Cognizant Technology Solutions</span></h3>
-          </div>
-          <span class="dates">Aug 2021 — Apr 2024</span>
-        </div>
-        <p class="sub">Applications support · Stability, Efficiency &amp; Effectiveness · Financial services platforms</p>
-        <ul>
-          <li>Provided technical and business support for users of enterprise banking applications — fielding stakeholder issues, delivering short-term resolutions, and working with technology partners on long-term remediation.</li>
-          <li>Owned incident response for P1/P2 issues under strict SLAs in a 24/7 rotating-shift L2 team — triage, bridge calls, resolution, and RCA documented in ServiceNow.</li>
-          <li>Acted as SME to senior stakeholders on IBM WebSphere, IBM MQ and production support processes, operating with independence of judgement.</li>
-          <li>Performed post-release checkouts after application releases and infrastructure updates; participated in disaster recovery testing and release activities through to production.</li>
-          <li>Monitored application health with AppDynamics and Datadog; administered Linux/RHEL servers and wrote Bash scripts for log analysis and operational automation.</li>
-          <li>Applied WebSphere Application Server patching and fix pack updates, and created/deleted IBM MQ objects (queue managers, queues, channels) as part of routine middleware administration.</li>
-          <li>Handled application deployments and decommissioning, database password resets, and joined Code Red / severity bridge calls to troubleshoot live issues directly with clients and stakeholders through to resolution.</li>
-          <li>Participated in DR check calls and monitoring to validate failover readiness across banking application environments.</li>
-          <li>Executed production changes end-to-end under formal change management with zero errors or outages, including complex multi-change windows handled solo.</li>
-          <li>Rated a top performer for all three years and received multiple client appreciations for incident handling and support quality.</li>
+    <p class="sub">Data &amp; AI</p>
+    <div class="grid">
+      <article class="card proj">
+        <h3>RISE Smart Scoring &amp; Feedback</h3>
+        <p>NLP scoring pipeline and Streamlit app that scores project abstracts against a four-criterion rubric and generates feedback for each applicant.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">NLP</span><span class="tag">Streamlit</span></div>
+      </article>
+      <article class="card proj">
+        <h3>Winter Road Risk Forecast</h3>
+        <p>Decision support pipeline that pulls live weather forecasts, scores road conditions into risk bands and produces maintenance recommendations with automated PDF reports.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Weather API</span><span class="tag">Docker</span></div>
+      </article>
+      <article class="card proj">
+        <h3>Crop Yield BI Dashboard</h3>
+        <p>SQL data cleaning pipeline and Power BI dashboard analyzing crop yield against soil type, pH and environmental conditions across 35,000+ records.</p>
+        <div class="tags"><span class="tag">SQL</span><span class="tag">Power BI</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- INCIDENTS -->
+  <section id="incidents" class="slide reveal">
+    <p class="kicker">Incident log</p>
+    <h2>Real production incidents</h2>
+    <p class="lead" style="margin-bottom:22px">A few incidents I handled at Cognizant, generalized for client confidentiality. Click any one for details.</p>
+    <div class="inc">
+      <details><summary><span class="sev">SEV 1</span>MQ outage caused by a NAS file lock</summary><p>Traced a queue manager failure to a stale file lock on the NAS storage behind it, worked with the storage team, and restored messaging without losing data.</p></details>
+      <details><summary><span class="sev">SEV 1</span>Service failure from an expired SSL certificate</summary><p>Found the expired certificate in the chain, renewed it and updated the keystore to restore connections, then set up tracking so expiries were caught early.</p></details>
+      <details><summary><span class="sev">SEV 1</span>Failed deployment needing a rollback</summary><p>Ran the planned rollback, confirmed services were back on the last good version, and opened an RCA with the development team.</p></details>
+      <details><summary><span class="sev s2">SEV 2</span>Jenkins deployment pipeline failing</summary><p>Read the build logs to find where the job broke, fixed the issue on the server, and re-ran the pipeline to confirm it completed cleanly.</p></details>
+      <details><summary><span class="sev s2">SEV 2</span>Filesystem full, stopping application logs</summary><p>Cleared archived logs, restarted the affected services, and raised a request for more disk along with an earlier alert threshold.</p></details>
+      <details><summary><span class="sev s2">SEV 2</span>High CPU slowing a production host</summary><p>Used top and ps to find the runaway process, worked with the app team on the cause, and confirmed CPU and response times were back to normal.</p></details>
+      <details><summary><span class="sev chg">CHANGE</span>Emergency weekend change through CAB</summary><p>Prepared the change and rollback plan on short notice, got emergency CAB approval, deployed the fix and validated it before closing the change.</p></details>
+      <details><summary><span class="sev chg">CHANGE</span>Eight production changes in one window, solo</summary><p>Planned the order and rollback for each change, verified every step, and completed all eight without an incident.</p></details>
+    </div>
+  </section>
+
+  <!-- CERTS + EDUCATION -->
+  <section id="certifications" class="slide reveal">
+    <div class="two">
+      <div>
+        <p class="kicker">Certifications</p>
+        <h2>Credentials</h2>
+        <ul class="list">
+          <li><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg><span><strong>Microsoft Certified: Azure Administrator Associate (AZ-104)</strong><span class="m">Passed October 2026</span></span></li>
+          <li><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg><span><strong>Microsoft Azure Fundamentals (AZ-900)</strong><span class="m">Score 921/1000</span></span></li>
+          <li><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg><span><strong>ITIL v3 Foundation</strong><span class="m">IT service management</span></span></li>
+          <li><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg><span><strong>AWS Academy</strong><span class="m">Cloud Foundations coursework</span></span></li>
+          <li><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg><span><strong>Six Sigma Yellow Belt</strong><span class="m">Process improvement</span></span></li>
         </ul>
       </div>
-      <div class="job">
-        <div class="job-head">
-          <div class="job-title">
-            <span class="co-logo"><img src="assets/amazon.png" alt="Amazon" onerror="this.parentElement.style.display='none'"></span>
-            <h3>Machine Learning Data Associate <span class="org">· Amazon</span></h3>
-          </div>
-          <span class="dates">Sept 2020 — Apr 2021</span>
-        </div>
-        <ul>
-          <li>Provided technical support for data applications, fielding issues and queries and working with technical teams to deliver resolutions within defined timelines.</li>
-          <li>Contributed to process standardization and improvement initiatives, maintaining documentation and sharing information across the team.</li>
-        </ul>
-      </div>
-      <div class="job">
-        <div class="job-head">
-          <h3>Postgraduate Certificate — Big Data Analytics &amp; AI <span class="org">· Georgian College</span></h3>
-          <span class="dates">2024 — 2025</span>
-        </div>
-        <ul>
-          <li>Completed with Honors. Relocated from India to Canada to build toward a cloud engineering career on the Azure track.</li>
-        </ul>
-      </div>
-      <div class="job">
-        <div class="job-head">
-          <h3>Bachelor of Engineering <span class="org">· Sathyabama Institute of Science and Technology</span></h3>
-          <span class="dates">2016 — 2020</span>
-        </div>
-        <ul>
-          <li>Completed with Honors.</li>
+      <div>
+        <p class="kicker">Education</p>
+        <h2>Studies</h2>
+        <ul class="list">
+          <li><svg viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg><span><strong>Postgraduate Certificate, Artificial Intelligence</strong><span class="m">Georgian College · 2024 - 2025</span></span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg><span><strong>Postgraduate Certificate, Big Data Analytics</strong><span class="m">Georgian College · 2024 - 2025</span></span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg><span><strong>Bachelor of Engineering</strong><span class="m">Sathyabama Institute of Science and Technology · 2016 - 2020</span></span></li>
         </ul>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="certifications">
-  <div class="wrap reveal">
-    <p class="eyebrow">Certifications</p>
-    <h2>Credentials</h2>
-    <div class="certs">
-      <div class="cert hl">
-        <p class="name">Microsoft Azure Fundamentals (AZ-900)</p>
-        <p class="meta">Scored 921/1000 · May 2025</p>
-      </div>
-      <div class="cert">
-        <p class="name">ITIL v3 Foundation</p>
-        <p class="meta">IT service management</p>
-      </div>
-      <div class="cert">
-        <p class="name">Prometheus &amp; Grafana</p>
-        <p class="meta">LinkedIn Learning certified</p>
-      </div>
-      <div class="cert">
-        <p class="name">AWS Academy</p>
-        <p class="meta">Cloud Foundations · Architecting · Data Eng · ML</p>
-      </div>
-      <div class="cert">
-        <p class="name">GCP Foundations</p>
-        <p class="meta">Udemy / Cognizant</p>
-      </div>
-      <div class="cert">
-        <p class="name">Six Sigma Yellow Belt</p>
-        <p class="meta">Process improvement</p>
-      </div>
-      <div class="cert pending">
-        <p class="name">Azure Administrator (AZ-104)</p>
-        <p class="meta">In progress</p>
-      </div>
+  <!-- CONTACT -->
+  <section id="contact" class="slide contact reveal">
+    <h2>Hiring for cloud or support? Let's talk.</h2>
+    <p class="lead" style="color:#DBEAFE">Based in Toronto and open to hybrid, remote or on-site roles across Canada. I usually reply within a day.</p>
+    <div class="cta">
+      <a class="btn btn-w" href="mailto:paulgomez.jayaprakash@gmail.com">paulgomez.jayaprakash@gmail.com</a>
+      <a class="btn btn-o" href="https://www.linkedin.com/in/paul-gomez21">LinkedIn</a>
+      <a class="btn btn-o" href="https://github.com/PaulJayaprakash21">GitHub</a>
     </div>
-  </div>
-</section>
+  </section>
 
 </main>
-
-<footer id="contact">
-  <div class="wrap reveal">
-    <p class="eyebrow">Contact</p>
-    <h2>Let's build reliable systems together.</h2>
-    <p class="lede">Open to production support, middleware, and cloud operations roles across Canada.</p>
-    <div class="tags" style="margin-top:16px">
-      <span class="tag">Production Support</span><span class="tag">Middleware Engineering</span>
-      <span class="tag">Cloud Operations</span><span class="tag">Platform Engineering</span>
-      <span class="tag">Application Support</span>
-      <span class="tag">SRE</span>
-    </div>
-    <div class="hero-cta" style="margin-top:26px">
-      <a class="btn btn-primary" href="mailto:jayaprakashpaul21@gmail.com">jayaprakashpaul21@gmail.com</a>
-      <a class="btn btn-ghost" href="https://www.linkedin.com/in/paul-gomez21">LinkedIn</a>
-    </div>
-  </div>
-</footer>
+<footer>© 2026 Paul Udayan Gomez Jayaprakash</footer>
 
 <script>
   (function(){
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
-      return;
-    }
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
-  })();
-  (function(){
-    var btn = document.getElementById('navToggle');
-    var links = document.getElementById('navLinks');
-    if(!btn || !links) return;
-    btn.addEventListener('click', function(){
-      var open = links.classList.toggle('open');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-    links.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){
-        links.classList.remove('open');
-        btn.setAttribute('aria-expanded','false');
-      });
-    });
-  })();
-  (function(){
-    document.querySelectorAll('.incident-toggle').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        var details = btn.nextElementSibling;
-        var isOpen = btn.getAttribute('aria-expanded') === 'true';
-        if (isOpen) {
-          details.style.maxHeight = null;
-          btn.setAttribute('aria-expanded', 'false');
-        } else {
-          details.style.maxHeight = details.scrollHeight + 'px';
-          btn.setAttribute('aria-expanded', 'true');
-        }
-      });
-    });
-  })();
-  (function(){
-    var dockLinks = document.querySelectorAll('.dock a[data-dock]');
-    if(!dockLinks.length) return;
-    var sections = Array.from(dockLinks).map(function(a){
-      return document.querySelector(a.getAttribute('href'));
-    }).filter(Boolean);
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        var id = '#' + entry.target.id;
-        var link = document.querySelector('.dock a[href="' + id + '"]');
-        if(!link) return;
-        if(entry.isIntersecting){
-          dockLinks.forEach(function(l){ l.classList.remove('active'); });
-          link.classList.add('active');
-        }
-      });
-    }, { rootMargin: '-40% 0px -50% 0px' });
-    sections.forEach(function(s){ io.observe(s); });
+    var els=document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){els.forEach(function(e){e.classList.add('in')});return;}
+    var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.08});
+    els.forEach(function(e){io.observe(e)});
   })();
 </script>
-
 </body>
 </html>
